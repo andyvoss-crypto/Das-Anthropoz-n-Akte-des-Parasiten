@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Anthropozän: Akte des Parasiten</title>
+
+    <!-- SEO and Social Sharing Meta Tags -->
+    <meta name="description" content="Eine ungeschönte Diagnose unseres Zeitalters. Eine interaktive Infografik über die erdrückenden Ausmaße des Anthropozäns und die Rolle der Menschheit.">
+    <meta property="og:title" content="Das Anthropozän: Akte des Parasiten">
+    <meta property="og:description" content="Eine ungeschönte Diagnose unseres Zeitalters. Eine interaktive Infografik über die erdrückenden Ausmaße des Anthropozäns und die Rolle der Menschheit.">
+    <meta property="og:image" content="https://placehold.co/1200x630/000000/ef4444?text=Akte+des+Parasiten">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #e2e8f0;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #f97316, #ef4444, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-bg {
+            position: relative;
+            background: radial-gradient(ellipse at 50% 100%, #1e293b 0%, #000000 70%);
+            overflow: hidden;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        .card {
+            background-color: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(239, 68, 68, 0.25);
+        }
+        .stat-card {
+             background: radial-gradient(circle at top left, rgba(239, 68, 68, 0.1), transparent 60%);
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1), transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 10px;
+            bottom: -10px;
+            width: 4px;
+            background-color: #334155;
+            transition: background-color 0.3s ease;
+        }
+        .timeline-item:hover::before {
+             background-color: #ef4444;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -11px;
+            top: 4px;
+            height: 24px;
+            width: 24px;
+            background-color: #000;
+            border-radius: 9999px;
+            border: 4px solid #475569;
+            transition: all 0.3s ease;
+        }
+         .timeline-item:hover .timeline-dot {
+            border-color: #ef4444;
+            transform: scale(1.1);
+        }
+        .earth-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: auto;
+        }
+        #earth-sphere {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #3b82f6;
+            box-shadow: inset -25px -25px 40px rgba(0,0,0,0.5), inset 10px 10px 20px rgba(255,255,255,0.3);
+            animation: rotate 30s linear infinite;
+        }
+        .parasite-vein {
+            position: absolute;
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0), rgba(220, 38, 38, 0.8));
+            border-radius: 50%;
+            animation: pulse 2s infinite ease-in-out;
+            transform-origin: center;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ef4444;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        @keyframes rotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+        @keyframes pulse { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="sticky top-0 z-50 bg-black/70 backdrop-blur-lg border-b border-slate-800 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <a href="#" class="text-xl font-bold gradient-text">Akte des Parasiten</a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="nav-link text-slate-300 hover:text-white font-medium">Home</a>
+                    <a href="#acceleration" class="nav-link text-slate-300 hover:text-white font-medium">Beschleunigung</a>
+                    <a href="#symptoms" class="nav-link text-slate-300 hover:text-white font-medium">Symptome</a>
+                    <a href="#timeline" class="nav-link text-slate-300 hover:text-white font-medium">Ignoranz</a>
+                    <a href="#parasite" class="nav-link text-slate-300 hover:text-white font-medium">Anatomie</a>
+                    <a href="#crossroads" class="nav-link text-slate-300 hover:text-white font-medium">Scheideweg</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-slate-900/95">
+            <a href="#" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Home</a>
+            <a href="#acceleration" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Beschleunigung</a>
+            <a href="#symptoms" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Symptome</a>
+            <a href="#timeline" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Ignoranz</a>
+            <a href="#parasite" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Anatomie</a>
+            <a href="#crossroads" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Scheideweg</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero-bg min-h-screen flex items-center justify-center p-4 text-center -mt-16">
+        <div id="particles-js"></div>
+        <div class="content-wrapper">
+            <h1 class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-4 text-slate-100">
+                Die Erde hat einen <span class="gradient-text">Parasiten.</span>
+            </h1>
+            <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter text-slate-100">
+                Uns.
+            </h2>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-400 mt-6 leading-relaxed">
+                Dies ist keine Meinung. Dies ist eine Akte, zusammengestellt aus den geologischen Spuren und den Daten, die wir hinterlassen. Eine ungeschönte Diagnose unseres Zeitalters: dem Anthropozän.
+            </p>
+        </div>
+    </header>
+
+    <main class="py-20 md:py-32">
+
+        <!-- Section 1: The Great Acceleration -->
+        <section id="acceleration" class="container mx-auto px-4 mb-24 md:mb-40 scroll-mt-20">
+            <div class="text-center mb-16 md:mb-20">
+                <h2 class="text-4xl md:text-6xl font-black mb-4 fade-in-up">Die <span class="gradient-text">Große Beschleunigung</span></h2>
+                <p class="text-lg text-slate-400 max-w-4xl mx-auto fade-in-up" style="transition-delay: 0.2s;">
+                    Ab ca. 1950 explodierte die menschliche Aktivität. Ein Wendepunkt, der den Planeten aus seinem 12.000 Jahre alten Gleichgewicht riss und eine neue, volatile geologische Epoche einleitete. Die Graphen lügen nicht.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="fade-in-up card h-[350px] p-4 rounded-2xl">
+                    <canvas id="populationChart"></canvas>
+                </div>
+                <div class="fade-in-up card h-[350px] p-4 rounded-2xl" style="transition-delay: 0.2s;">
+                    <canvas id="co2Chart"></canvas>
+                </div>
+                <div class="fade-in-up card h-[350px] p-4 rounded-2xl" style="transition-delay: 0.4s;">
+                    <canvas id="extinctionChart"></canvas>
+                </div>
+                <div class="fade-in-up card h-[350px] p-4 rounded-2xl" style="transition-delay: 0.6s;">
+                    <canvas id="plasticChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Symptoms -->
+        <section id="symptoms" class="container mx-auto px-4 mb-24 md:mb-40 scroll-mt-20">
+            <div class="text-center mb-16 md:mb-20">
+                <h2 class="text-4xl md:text-6xl font-black mb-4 fade-in-up">Die Symptome des Befalls</h2>
+                <p class="text-lg text-slate-400 max-w-4xl mx-auto fade-in-up" style="transition-delay: 0.2s;">Jede Handlung hinterlässt eine Narbe. Wir nennen es Entwicklung. Die Erde nennt es Fieber, Vergiftung und Zerstörung. Vier Kernsymptome einer planetaren Krankheit.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Symptom 1: Klimakollaps -->
+                <div class="fade-in-up card stat-card p-8 rounded-2xl">
+                    <h3 class="text-3xl font-bold gradient-text mb-3">Symptom I: Fieber</h3>
+                    <p class="text-slate-300 text-lg mb-4">Wir pumpen Treibhausgase in die Atmosphäre, die für Jahrhunderte dort verbleiben. Die Folge: eine globale Erwärmung von beispielloser Geschwindigkeit, die Eisschilde schmilzt, Ozeane versauern lässt und Extremwetter zur neuen Normalität macht.</p>
+                    <div class="text-5xl font-black text-slate-100" data-counter-target="420" data-suffix="+ ppm">0</div>
+                    <p class="text-slate-400 font-semibold">CO₂-Konzentration in der Atmosphäre (Höchster Wert seit min. 800.000 Jahren)</p>
+                </div>
+                <!-- Symptom 2: Artensterben -->
+                <div class="fade-in-up card stat-card p-8 rounded-2xl" style="transition-delay: 0.2s;">
+                    <h3 class="text-3xl font-bold gradient-text mb-3">Symptom II: Zelltod</h3>
+                    <p class="text-slate-300 text-lg mb-4">Wir zerstören Lebensräume, vergiften Ökosysteme und jagen Arten bis zur Ausrottung. Dies ist das 6. Massenaussterben der Erdgeschichte – das erste, das von einer einzigen Spezies verursacht wird. Das Netz des Lebens zerreißt.</p>
+                    <div class="text-5xl font-black text-slate-100" data-counter-target="1000" data-suffix="x">0</div>
+                    <p class="text-slate-400 font-semibold">Beschleunigung der Aussterberate im Vergleich zur natürlichen Rate</p>
+                </div>
+                <!-- Symptom 3: Landnahme -->
+                <div class="fade-in-up card stat-card p-8 rounded-2xl" style="transition-delay: 0.4s;">
+                    <h3 class="text-3xl font-bold gradient-text mb-3">Symptom III: Wucherung</h3>
+                    <p class="text-slate-300 text-lg mb-4">Wälder, Feuchtgebiete, Savannen – wir wandeln sie um in Monokulturen, Städte und Minen. Wir fragmentieren die Lebensadern des Planeten, bis nur noch isolierte, sterbende Inseln der Natur übrig sind.</p>
+                     <div class="text-5xl font-black text-slate-100" data-counter-target="75" data-suffix="%">0</div>
+                    <p class="text-slate-400 font-semibold">Der eisfreien Landoberfläche, die signifikant durch Menschen verändert wurde</p>
+                </div>
+                 <!-- Symptom 4: Vergiftung -->
+                <div class="fade-in-up card stat-card p-8 rounded-2xl" style="transition-delay: 0.6s;">
+                    <h3 class="text-3xl font-bold gradient-text mb-3">Symptom IV: Toxizität</h3>
+                    <p class="text-slate-300 text-lg mb-4">Unsere Zivilisation produziert beständige Gifte. Kunststoffe, Chemikalien und Atommüll hinterlassen eine "Technofossil"-Schicht, die für geologische Zeiträume erhalten bleibt. Wir haben eine neue, unzerstörbare Abfallschicht über den Planeten gelegt.</p>
+                    <div class="text-5xl font-black text-slate-100" data-counter-target="1" data-prefix=">">0</div>
+                    <p class="text-slate-400 font-semibold">Das Verhältnis der Masse aller menschengemachten Objekte zur gesamten Biomasse</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Timeline of Inaction -->
+        <section id="timeline" class="container mx-auto px-4 mb-24 md:mb-40 scroll-mt-20">
+            <div class="text-center mb-16 md:mb-20">
+                <h2 class="text-4xl md:text-6xl font-black mb-4 fade-in-up">Chronik der <span class="gradient-text">Ignoranz</span></h2>
+                <p class="text-lg text-slate-400 max-w-4xl mx-auto fade-in-up" style="transition-delay: 0.2s;">Die Warnungen waren da. Deutlich. Seit Jahrzehnten. Doch jede Warnung wurde mit einer weiteren Eskalation der Zerstörung beantwortet. Eine Zeitleiste des vorsätzlichen Wegsehens.</p>
+            </div>
+            <div class="max-w-3xl mx-auto relative">
+                <div class="relative pl-10 timeline-item fade-in-up">
+                    <div class="timeline-dot"></div>
+                    <p class="text-sm text-red-400 font-bold">1972</p>
+                    <h4 class="font-bold text-xl text-slate-100">Warnung: "Die Grenzen des Wachstums"</h4>
+                    <p class="text-slate-400">Der Club of Rome publiziert die erste große Studie, die vor den katastrophalen Folgen exponentiellen Wachstums auf einem endlichen Planeten warnt.</p>
+                    <p class="mt-2 text-sm text-slate-500">Globale CO₂-Emissionen: ~15 Gt</p>
+                </div>
+                <div class="relative pl-10 timeline-item fade-in-up">
+                    <div class="timeline-dot"></div>
+                    <p class="text-sm text-red-400 font-bold">1990</p>
+                    <h4 class="font-bold text-xl text-slate-100">Warnung: Erster IPCC-Bericht</h4>
+                    <p class="text-slate-400">Der Weltklimarat bestätigt den menschlichen Einfluss auf das Klima und fordert "substanzielle Reduktionen" der Emissionen.</p>
+                     <p class="mt-2 text-sm text-slate-500">Globale CO₂-Emissionen: ~22 Gt</p>
+                </div>
+                <div class="relative pl-10 timeline-item fade-in-up">
+                    <div class="timeline-dot"></div>
+                    <p class="text-sm text-red-400 font-bold">2000</p>
+                    <h4 class="font-bold text-xl text-slate-100">Diagnose: Das "Anthropozän"</h4>
+                    <p class="text-slate-400">Paul Crutzen schlägt den Begriff vor und formalisiert die wissenschaftliche Erkenntnis, dass der Mensch zur dominanten geologischen Kraft geworden ist.</p>
+                     <p class="mt-2 text-sm text-slate-500">Globale CO₂-Emissionen: ~25 Gt</p>
+                </div>
+                <div class="relative pl-10 timeline-item fade-in-up">
+                    <div class="timeline-dot"></div>
+                    <p class="text-sm text-red-400 font-bold">2015</p>
+                    <h4 class="font-bold text-xl text-slate-100">Versprechen: Pariser Klimaabkommen</h4>
+                    <p class="text-slate-400">Die Weltgemeinschaft einigt sich auf das Ziel, die Erderwärmung auf deutlich unter 2°C zu begrenzen. Ein Versprechen ohne ausreichende Taten.</p>
+                     <p class="mt-2 text-sm text-slate-500">Globale CO₂-Emissionen: ~35 Gt</p>
+                </div>
+                 <div class="relative pl-10 timeline-item fade-in-up" style="border-left-color: transparent;">
+                    <div class="timeline-dot"></div>
+                    <p class="text-sm text-red-400 font-bold">HEUTE</p>
+                    <h4 class="font-bold text-xl text-slate-100">Realität: Ungebremste Eskalation</h4>
+                    <p class="text-slate-400">Trotz aller Warnungen, Diagnosen und Versprechen erreichen die Emissionen und die Zerstörung immer neue Höchststände. Die Ignoranz ist systemisch.</p>
+                     <p class="mt-2 text-sm text-slate-500">Globale CO₂-Emissionen: >37 Gt</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: The Parasite Analogy -->
+        <section id="parasite" class="bg-slate-900/50 py-20 md:py-32 scroll-mt-20">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-6xl font-black mb-4 fade-in-up"><span class="gradient-text">Die Anatomie</span> eines Parasiten</h2>
+                <p class="text-lg text-slate-400 max-w-4xl mx-auto mb-16 fade-in-up" style="transition-delay: 0.2s;">Ein Parasit entzieht seinem Wirt Ressourcen, um zu wachsen. Er gibt nichts zurück. Sein Abfall vergiftet den Wirt. Sein unkontrolliertes Wachstum führt unweigerlich zur Schwächung oder zum Tod des Wirtes. <br class="hidden md:block"> Sehen Sie die Parallelen?</p>
+                
+                <div class="fade-in-up" style="transition-delay: 0.4s;">
+                    <div class="earth-container">
+                        <div id="earth-sphere"></div>
+                        <!-- Veins will be added by JS -->
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold text-slate-100">Extraktion</h4>
+                            <p class="text-slate-400">Wir bohren, graben und roden, um den Hunger nach Energie und Rohstoffen zu stillen. Arterien des Planeten werden zu unseren Versorgungsleitungen.</p>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold text-slate-100">Metabolismus</h4>
+                            <p class="text-slate-400">Unsere Wirtschaft verwandelt Ressourcen in kurzlebige Produkte und eine immense Menge an Abfall – unseren toxischen Stoffwechsel.</p>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold text-slate-100">Exkretion</h4>
+                            <p class="text-slate-400">CO₂, Plastik, Chemikalien. Unsere Abfälle werden in die Atmosphäre, die Ozeane und die Böden ausgeschieden und vergiften das System, das uns am Leben erhält.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: The Crossroads -->
+        <section id="crossroads" class="container mx-auto px-4 text-center py-20 md:py-32 scroll-mt-20">
+            <h2 class="text-4xl md:text-6xl font-black tracking-tighter fade-in-up">Vom <span class="gradient-text">Parasit</span> zum <span class="gradient-text">Hüter?</span></h2>
+            <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mt-6 leading-relaxed fade-in-up" style="transition-delay: 0.2s;">
+                Die Diagnose ist gestellt. Die Akte ist vollständig. Kein anderes Lebewesen kann seine Rolle reflektieren und bewusst verändern. Diese einzigartige Fähigkeit ist die letzte, winzige Hoffnung in der Bilanz des Anthropozäns. Die Frage ist nicht mehr, was wir wissen. Sondern, wer wir sein wollen.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 border-t border-slate-800 bg-black">
+        <p class="text-slate-500 text-sm">Diese Infografik ist eine Synthese basierend auf Daten und Erkenntnissen aus den bereitgestellten Dokumenten zum Anthropozän.</p>
+         <p class="text-xs text-slate-600 mt-2">Quellen u.a.: IPCC, IPBES, Anthropocene Working Group, Crutzen & Stoermer.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- Particle.js Hero Background ---
+        particlesJS('particles-js', {
+          "particles": { "number": { "value": 80, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#ef4444" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } }, "size": { "value": 2.5, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#475569", "opacity": 0.2, "width": 1 }, "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false }, "resize": true }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } } }, "retina_detect": true });
+
+        // --- Chart.js Default Styles ---
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = 'rgba(226, 232, 240, 0.7)';
+        Chart.defaults.borderColor = 'rgba(51, 65, 85, 0.5)';
+
+        // --- Intersection Observer for Fade-in and Counter Animations ---
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    if (entry.target.hasAttribute('data-counter-target')) {
+                        const el = entry.target;
+                        const target = +el.getAttribute('data-counter-target');
+                        const prefix = el.getAttribute('data-prefix') || '';
+                        const suffix = el.getAttribute('data-suffix') || '';
+                        let current = 0;
+                        const duration = 2000;
+                        const stepTime = 20;
+                        const steps = duration / stepTime;
+                        const increment = target / steps;
+                        
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                el.innerText = prefix + Math.ceil(current).toLocaleString('de-DE') + suffix;
+                                setTimeout(updateCounter, stepTime);
+                            } else {
+                                el.innerText = prefix + target.toLocaleString('de-DE') + suffix;
+                            }
+                        };
+                        updateCounter();
+                        animationObserver.unobserve(el); // Animate only once
+                    }
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.fade-in-up, [data-counter-target]').forEach(el => animationObserver.observe(el));
+        
+        // --- Chart Configurations ---
+        const baseLineOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false }, title: { display: true, font: { size: 14, weight: 'bold' }, color: '#cbd5e1' } },
+            scales: { y: { beginAtZero: true, grid: { color: 'rgba(51, 65, 85, 0.5)' }, ticks: { color: 'rgba(226, 232, 240, 0.7)' } }, x: { grid: { color: 'rgba(51, 65, 85, 0.5)' }, ticks: { color: 'rgba(226, 232, 240, 0.7)' } } },
+            animation: {
+                duration: 1500,
+                easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+            }
+        };
+
+        // --- Chart Creation ---
+        new Chart(document.getElementById('populationChart').getContext('2d'), {
+            type: 'line',
+            data: { labels: ['1800', '1900', '1950', '2000', '2024'], datasets: [{ data: [1, 1.6, 2.5, 6.1, 8.1], borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.2)', fill: true, tension: 0.4 }] },
+            options: { ...baseLineOptions, plugins: { ...baseLineOptions.plugins, title: { ...baseLineOptions.plugins.title, text: 'Weltbevölkerung (Mrd.)' } } }
+        });
+
+        new Chart(document.getElementById('co2Chart').getContext('2d'), {
+            type: 'line',
+            data: { labels: ['1800', '1900', '1950', '2000', '2024'], datasets: [{ data: [280, 295, 311, 369, 420], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.2)', fill: true, tension: 0.4 }] },
+            options: { ...baseLineOptions, plugins: { ...baseLineOptions.plugins, title: { ...baseLineOptions.plugins.title, text: 'CO₂-Konzentration (ppm)' } } }
+        });
+
+        new Chart(document.getElementById('extinctionChart').getContext('2d'), {
+            type: 'bar',
+            data: { labels: ['Hintergrundrate', 'Aktuelle Rate'], datasets: [{ data: [1, 500], backgroundColor: ['#475569', '#dc2626'], borderRadius: 4 }] },
+            options: { ...baseLineOptions, plugins: { ...baseLineOptions.plugins, title: { ...baseLineOptions.plugins.title, text: 'Aussterberate (Faktor)' } } }
+        });
+
+        new Chart(document.getElementById('plasticChart').getContext('2d'), {
+            type: 'line',
+            data: { labels: ['1950', '1975', '2000', '2020'], datasets: [{ data: [2, 50, 200, 400], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.2)', fill: true, tension: 0.4 }] },
+            options: { ...baseLineOptions, plugins: { ...baseLineOptions.plugins, title: { ...baseLineOptions.plugins.title, text: 'Plastikproduktion (Mio. t)' } } }
+        });
+
+        // --- Earth Veins Animation ---
+        const earthContainer = document.querySelector('.earth-container');
+        if (earthContainer) {
+            const numVeins = 15;
+            for (let i = 0; i < numVeins; i++) {
+                const vein = document.createElement('div');
+                vein.className = 'parasite-vein';
+                const size = Math.random() * 80 + 20;
+                vein.style.width = `${size}px`;
+                vein.style.height = `${size * 2}px`;
+                vein.style.top = `${Math.random() * (300 - size)}px`;
+                vein.style.left = `${Math.random() * (300 - size)}px`;
+                vein.style.transform = `rotate(${Math.random() * 360}deg)`;
+                vein.style.animationDelay = `${Math.random() * 2}s`;
+                earthContainer.appendChild(vein);
+            }
+        }
+
+        // --- Navigation Logic ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        const mainSections = document.querySelectorAll('main section');
+        const headerSection = document.querySelector('header#home');
+        const allSections = [headerSection, ...Array.from(mainSections)];
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const activateNavLink = () => {
+            let currentSectionIndex = 0;
+            
+            const scrollPosition = window.scrollY;
+
+            allSections.forEach((section, index) => {
+                 const sectionTop = section.offsetTop;
+                 if (scrollPosition >= sectionTop - 100) {
+                    currentSectionIndex = index;
+                 }
+            });
+            
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            if(navLinks[currentSectionIndex]) {
+                 navLinks[currentSectionIndex].classList.add('active');
+            }
+        };
+
+        window.addEventListener('scroll', activateNavLink);
+        activateNavLink(); // Initial call
+    });
+    </script>
+</body>
+</html>
+
+
+
