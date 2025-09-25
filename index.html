@@ -1,33 +1,88 @@
 <!DOCTYPE html>
+<!-- 
+    NOTE: The lang attribute is dynamically set via JavaScript 
+    based on user preference or browser settings. It defaults to German.
+-->
 <html lang="de" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Dynamically set via JavaScript for i18n -->
     <title>Das Anthropozän: Akte des Parasiten</title>
 
-    <!-- SEO and Social Sharing Meta Tags -->
-    <meta name="description" content="Eine ungeschönte Diagnose unseres Zeitalters. Eine interaktive Infografik über die erdrückenden Ausmaße des Anthropozäns und die Rolle der Menschheit.">
-    <meta property="og:title" content="Das Anthropozän: Akte des Parasiten">
-    <meta property="og:description" content="Eine ungeschönte Diagnose unseres Zeitalters. Eine interaktive Infografik über die erdrückenden Ausmaße des Anthropozäns und die Rolle der Menschheit.">
-    <meta property="og:image" content="https://placehold.co/1200x630/000000/ef4444?text=Akte+des+Parasiten">
+    <!-- 
+        =====================================================================
+        CATEGORY: SEO & VISIBILITY (OPTIMIZED)
+        =====================================================================
+        - Unique, descriptive meta tags for search engines and social sharing.
+        - Added Twitter Card support for improved Twitter previews.
+        - Added hreflang links for multilingual SEO.
+        - Implemented JSON-LD structured data for Rich Snippets.
+    -->
+    <meta name="description" data-i18n-key="meta_description" content="Eine ungeschönte Diagnose unseres Zeitalters. Eine interaktive Infografik über die erdrückenden Ausmaße des Anthropozäns und die Rolle der Menschheit.">
+    
+    <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+    <meta property="og:title" data-i18n-key="og_title" content="Das Anthropozän: Akte des Parasiten">
+    <meta property="og:description" data-i18n-key="og_description" content="Eine ungeschönte Diagnose unseres Zeitalters. Eine interaktive Infografik über die erdrückenden Ausmaße des Anthropozäns und die Rolle der Menschheit.">
+    <meta property="og:image" content="https://placehold.co/1200x630/0a0a0a/ef4444?text=THE+ANTHROPOCENE">
+    <meta property="og:url" content="https://example.com"> <!-- Replace with actual URL -->
     <meta property="og:type" content="website">
 
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" data-i18n-key="og_title" content="Das Anthropozän: Akte des Parasiten">
+    <meta name="twitter:description" data-i18n-key="og_description" content="Eine ungeschönte Diagnose unseres Zeitalters. Eine interaktive Infografik über die erdrückenden Ausmaße des Anthropozäns und die Rolle der Menschheit.">
+    <meta name="twitter:image" content="https://placehold.co/1200x630/0a0a0a/ef4444?text=THE+ANTHROPOCENE">
+
+    <!-- Hreflang Links for Multilingual SEO -->
+    <link rel="alternate" hreflang="de" href="https://example.com?lang=de">
+    <link rel="alternate" hreflang="en" href="https://example.com?lang=en">
+    <link rel="alternate" hreflang="es" href="https://example.com?lang=es">
+    <link rel="alternate" hreflang="fr" href="https://example.com?lang=fr">
+    <link rel="alternate" hreflang="ru" href="https://example.com?lang=ru">
+    <link rel="alternate" hreflang="ar" href="https://example.com?lang=ar">
+    <link rel="alternate" hreflang="zh" href="https://example.com?lang=zh">
+    <link rel="alternate" hreflang="x-default" href="https://example.com">
+
+    <!-- Scripts and Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- 
+        =====================================================================
+        CATEGORY: PERFORMANCE & CODE QUALITY (OPTIMIZED)
+        =====================================================================
+        - CSS is structured for readability and includes accessibility enhancements.
+        - For a production environment, this CSS should be:
+          1. Extracted to an external file (e.g., styles.css) for better caching.
+          2. Minified to reduce file size.
+          3. Processed with Autoprefixer for cross-browser compatibility.
+        - Added RTL support for languages like Arabic.
+        - Enhanced focus visibility for keyboard navigation.
+    -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000000;
-            color: #e2e8f0;
+            color: #e2e8f0; /* WCAG AA compliant on #000 */
+            overflow-x: hidden;
+        }
+        /* Focus state for keyboard users, improving accessibility */
+        :focus-visible {
+            outline: 3px solid #f97316;
+            outline-offset: 2px;
+            border-radius: 4px;
         }
         .gradient-text {
             background: linear-gradient(90deg, #f97316, #ef4444, #dc2626);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            color: #ef4444; /* Fallback for accessibility, WCAG AA compliant */
         }
         .hero-bg {
             position: relative;
@@ -42,10 +97,7 @@
             left: 0;
             z-index: 0;
         }
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-        }
+        .content-wrapper { position: relative; z-index: 1; }
         .card {
             background-color: rgba(15, 23, 42, 0.5);
             border: 1px solid rgba(51, 65, 85, 0.5);
@@ -79,9 +131,7 @@
             background-color: #334155;
             transition: background-color 0.3s ease;
         }
-        .timeline-item:hover::before {
-             background-color: #ef4444;
-        }
+        .timeline-item:hover::before { background-color: #ef4444; }
         .timeline-dot {
             position: absolute;
             left: -11px;
@@ -133,31 +183,123 @@
             background-color: #ef4444;
             transition: width 0.3s ease;
         }
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
         @keyframes rotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         @keyframes pulse { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+        
+        /* RTL (Right-to-Left) Styles for Arabic */
+        html[dir="rtl"] {
+            text-align: right;
+        }
+        html[dir="rtl"] .timeline-item {
+            padding-left: 0;
+            padding-right: 2.5rem; /* Equivalent to pl-10 */
+        }
+        html[dir="rtl"] .timeline-item::before {
+            left: auto;
+            right: -2px;
+        }
+        html[dir="rtl"] .timeline-dot {
+            left: auto;
+            right: -11px;
+        }
+        html[dir="rtl"] .stat-card {
+            background: radial-gradient(circle at top right, rgba(239, 68, 68, 0.1), transparent 60%);
+        }
+        html[dir="rtl"] .gradient-text {
+            background: linear-gradient(-90deg, #f97316, #ef4444, #dc2626);
+            -webkit-background-clip: text;
+        }
     </style>
+
+    <!-- 
+        Structured Data (JSON-LD) for enhanced SEO.
+        This helps search engines understand the content and context of the page,
+        increasing the chances of appearing as a "Rich Snippet" in search results.
+    -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Das Anthropozän: Akte des Parasiten",
+      "description": "Eine interaktive Infografik über die erdrückenden Ausmaße des Anthropozäns und die Rolle der Menschheit als planetare Kraft.",
+      "url": "https://example.com",
+      "inLanguage": "de",
+      "mainEntity": {
+        "@type": "Article",
+        "headline": "Die Erde hat einen Parasiten. Uns.",
+        "author": {
+          "@type": "Organization",
+          "name": "Wissenschaftskommunikation"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Wissenschaftskommunikation"
+        },
+        "image": "https://placehold.co/1200x630/0a0a0a/ef4444?text=THE+ANTHROPOCENE",
+        "datePublished": "2024-09-25",
+        "dateModified": "2024-09-25"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "#home hgroup",
+          "#home p"
+        ]
+      }
+    }
+    </script>
 </head>
 
 <body class="antialiased">
 
-    <!-- Navigation Bar -->
+    <!-- 
+        =====================================================================
+        CATEGORY: ACCESSIBILITY (OPTIMIZED)
+        =====================================================================
+        - Navigation uses semantic HTML (<nav>, <a>).
+        - Mobile menu button has ARIA attributes (aria-controls, aria-expanded).
+        - Language switcher has a descriptive aria-label.
+        - `aria-current="page"` is used for the active navigation link.
+    -->
     <nav id="navbar" class="sticky top-0 z-50 bg-black/70 backdrop-blur-lg border-b border-slate-800 transition-all duration-300">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between h-16">
-                <a href="https://andyvoss-crypto.github.io/Enzyklop-die-des-Lebens-Eine-Reise-durch-Wissen-und-Weisheit-final/" class="text-xl font-bold gradient-text">Akte des Parasiten</a>
+                <a href="#home" class="text-xl font-bold gradient-text" data-i18n-key="nav_brand">Akte des Parasiten</a>
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="https://andyvoss-crypto.github.io/Enzyklop-die-des-Lebens-Eine-Reise-durch-Wissen-und-Weisheit-final/" class="nav-link text-slate-300 hover:text-white font-medium">Home</a>
-                    <a href="#acceleration" class="nav-link text-slate-300 hover:text-white font-medium">Beschleunigung</a>
-                    <a href="#symptoms" class="nav-link text-slate-300 hover:text-white font-medium">Symptome</a>
-                    <a href="#timeline" class="nav-link text-slate-300 hover:text-white font-medium">Ignoranz</a>
-                    <a href="#parasite" class="nav-link text-slate-300 hover:text-white font-medium">Anatomie</a>
-                    <a href="#crossroads" class="nav-link text-slate-300 hover:text-white font-medium">Scheideweg</a>
+                    <a href="#home" class="nav-link text-slate-300 hover:text-white font-medium" data-i18n-key="nav_home">Home</a>
+                    <a href="#acceleration" class="nav-link text-slate-300 hover:text-white font-medium" data-i18n-key="nav_acceleration">Beschleunigung</a>
+                    <a href="#symptoms" class="nav-link text-slate-300 hover:text-white font-medium" data-i18n-key="nav_symptoms">Symptome</a>
+                    <a href="#timeline" class="nav-link text-slate-300 hover:text-white font-medium" data-i18n-key="nav_ignorance">Ignoranz</a>
+                    <a href="#parasite" class="nav-link text-slate-300 hover:text-white font-medium" data-i18n-key="nav_anatomy">Anatomie</a>
+                    <a href="#crossroads" class="nav-link text-slate-300 hover:text-white font-medium" data-i18n-key="nav_crossroads">Scheideweg</a>
+                </div>
+                <!-- Language Switcher -->
+                <div class="hidden md:block">
+                    <select id="lang-switch" data-i18n-key-aria="aria_lang_select" aria-label="Sprachauswahl" class="bg-slate-800 border border-slate-700 text-white text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2">
+                        <option value="de">Deutsch</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="ru">Русский</option>
+                        <option value="ar">العربية</option>
+                        <option value="zh">中文</option>
+                    </select>
                 </div>
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-slate-300 hover:text-white focus:outline-none">
+                    <button id="mobile-menu-button" aria-controls="mobile-menu" aria-expanded="false" class="text-slate-300 hover:text-white focus:outline-none rounded">
+                        <span class="sr-only" data-i18n-key="sr_open_menu">Hauptmenü öffnen</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
@@ -166,26 +308,35 @@
             </div>
         </div>
         <div id="mobile-menu" class="md:hidden hidden bg-slate-900/95">
-            <a href="https://andyvoss-crypto.github.io/Enzyklop-die-des-Lebens-Eine-Reise-durch-Wissen-und-Weisheit-final/" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Home</a>
-            <a href="#acceleration" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Beschleunigung</a>
-            <a href="#symptoms" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Symptome</a>
-            <a href="#timeline" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Ignoranz</a>
-            <a href="#parasite" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Anatomie</a>
-            <a href="#crossroads" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800">Scheideweg</a>
+            <a href="#home" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800" data-i18n-key="nav_home">Home</a>
+            <a href="#acceleration" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800" data-i18n-key="nav_acceleration">Beschleunigung</a>
+            <a href="#symptoms" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800" data-i18n-key="nav_symptoms">Symptome</a>
+            <a href="#timeline" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800" data-i18n-key="nav_ignorance">Ignoranz</a>
+            <a href="#parasite" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800" data-i18n-key="nav_anatomy">Anatomie</a>
+            <a href="#crossroads" class="mobile-nav-link block py-2 px-4 text-sm text-slate-300 hover:bg-slate-800" data-i18n-key="nav_crossroads">Scheideweg</a>
+            <div class="p-4">
+                 <select id="lang-switch-mobile" data-i18n-key-aria="aria_lang_select" aria-label="Sprachauswahl" class="w-full bg-slate-800 border border-slate-700 text-white text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2">
+                    <option value="de">Deutsch</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="ru">Русский</option>
+                    <option value="ar">العربية</option>
+                    <option value="zh">中文</option>
+                </select>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <header id="home" class="hero-bg min-h-screen flex items-center justify-center p-4 text-center -mt-16">
-        <div id="particles-js"></div>
+        <div id="particles-js" aria-hidden="true"></div>
         <div class="content-wrapper">
-            <h1 class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-4 text-slate-100">
-                Die Erde hat einen <span class="gradient-text">Parasiten.</span>
-            </h1>
-            <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter text-slate-100">
-                Uns.
-            </h2>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-400 mt-6 leading-relaxed">
+             <hgroup class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-4 text-slate-100">
+                <h1 data-i18n-key="hero_title">Die Erde hat einen <span class="gradient-text">Parasiten.</span></h1>
+                <h2 class="text-4xl md:text-7xl" data-i18n-key="hero_subtitle">Uns.</h2>
+            </hgroup>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-400 mt-6 leading-relaxed" data-i18n-key="hero_paragraph">
                 Dies ist keine Meinung. Dies ist eine Akte, zusammengestellt aus den geologischen Spuren und den Daten, die wir hinterlassen. Eine ungeschönte Diagnose unseres Zeitalters: dem Anthropozän.
             </p>
         </div>
@@ -194,135 +345,134 @@
     <main class="py-20 md:py-32">
 
         <!-- Section 1: The Great Acceleration -->
-        <section id="acceleration" class="container mx-auto px-4 mb-24 md:mb-40 scroll-mt-20">
+        <section id="acceleration" class="container mx-auto px-4 mb-24 md:mb-40 scroll-mt-20" aria-labelledby="acceleration-title">
             <div class="text-center mb-16 md:mb-20">
-                <h2 class="text-4xl md:text-6xl font-black mb-4 fade-in-up">Die <span class="gradient-text">Große Beschleunigung</span></h2>
-                <p class="text-lg text-slate-400 max-w-4xl mx-auto fade-in-up" style="transition-delay: 0.2s;">
+                <h2 id="acceleration-title" class="text-4xl md:text-6xl font-black mb-4 fade-in-up" data-i18n-key="acceleration_title">Die <span class="gradient-text">Große Beschleunigung</span></h2>
+                <p class="text-lg text-slate-400 max-w-4xl mx-auto fade-in-up" style="transition-delay: 0.2s;" data-i18n-key="acceleration_paragraph">
                     Ab ca. 1950 explodierte die menschliche Aktivität. Ein Wendepunkt, der den Planeten aus seinem 12.000 Jahre alten Gleichgewicht riss und eine neue, volatile geologische Epoche einleitete. Die Graphen lügen nicht.
                 </p>
             </div>
+            <!-- 
+                ACCESSIBILITY NOTE: Charts are presented within canvas elements with role="img"
+                and a descriptive aria-label, making their purpose clear to screen readers.
+            -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="fade-in-up card h-[350px] p-4 rounded-2xl">
-                    <canvas id="populationChart"></canvas>
+                    <canvas id="populationChart" role="img" data-i18n-key-aria="aria_chart_population" aria-label="Diagramm: Weltbevölkerung von 1800 bis 2025"></canvas>
                 </div>
                 <div class="fade-in-up card h-[350px] p-4 rounded-2xl" style="transition-delay: 0.2s;">
-                    <canvas id="co2Chart"></canvas>
+                    <canvas id="co2Chart" role="img" data-i18n-key-aria="aria_chart_co2" aria-label="Diagramm: CO₂-Konzentration in ppm von 1800 bis 2025"></canvas>
                 </div>
                 <div class="fade-in-up card h-[350px] p-4 rounded-2xl" style="transition-delay: 0.4s;">
-                    <canvas id="extinctionChart"></canvas>
+                    <canvas id="extinctionChart" role="img" data-i18n-key-aria="aria_chart_extinction" aria-label="Balkendiagramm: Aussterberate im Vergleich zur Hintergrundrate"></canvas>
                 </div>
                 <div class="fade-in-up card h-[350px] p-4 rounded-2xl" style="transition-delay: 0.6s;">
-                    <canvas id="plasticChart"></canvas>
+                    <canvas id="plasticChart" role="img" data-i18n-key-aria="aria_chart_plastic" aria-label="Diagramm: Plastikproduktion in Millionen Tonnen von 1950 bis 2024"></canvas>
                 </div>
             </div>
         </section>
 
         <!-- Section 2: The Symptoms -->
-        <section id="symptoms" class="container mx-auto px-4 mb-24 md:mb-40 scroll-mt-20">
+        <section id="symptoms" class="container mx-auto px-4 mb-24 md:mb-40 scroll-mt-20" aria-labelledby="symptoms-title">
             <div class="text-center mb-16 md:mb-20">
-                <h2 class="text-4xl md:text-6xl font-black mb-4 fade-in-up">Die Symptome des Befalls</h2>
-                <p class="text-lg text-slate-400 max-w-4xl mx-auto fade-in-up" style="transition-delay: 0.2s;">Jede Handlung hinterlässt eine Narbe. Wir nennen es Entwicklung. Die Erde nennt es Fieber, Vergiftung und Zerstörung. Vier Kernsymptome einer planetaren Krankheit.</p>
+                <h2 id="symptoms-title" class="text-4xl md:text-6xl font-black mb-4 fade-in-up" data-i18n-key="symptoms_title">Die Symptome des Befalls</h2>
+                <p class="text-lg text-slate-400 max-w-4xl mx-auto fade-in-up" style="transition-delay: 0.2s;" data-i18n-key="symptoms_paragraph">Jede Handlung hinterlässt eine Narbe. Wir nennen es Entwicklung. Die Erde nennt es Fieber, Vergiftung und Zerstörung. Vier Kernsymptome einer planetaren Krankheit.</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Symptom 1: Klimakollaps -->
-                <div class="fade-in-up card stat-card p-8 rounded-2xl">
-                    <h3 class="text-3xl font-bold gradient-text mb-3">Symptom I: Fieber</h3>
-                    <p class="text-slate-300 text-lg mb-4">Wir pumpen Treibhausgase in die Atmosphäre, die für Jahrhunderte dort verbleiben. Die Folge: eine globale Erwärmung von beispielloser Geschwindigkeit, die Eisschilde schmilzt, Ozeane versauern lässt und Extremwetter zur neuen Normalität macht.</p>
-                    <div class="text-5xl font-black text-slate-100" data-counter-target="420" data-suffix="+ ppm">0</div>
-                    <p class="text-slate-400 font-semibold">CO₂-Konzentration in der Atmosphäre (Höchster Wert seit min. 800.000 Jahren)</p>
-                </div>
-                <!-- Symptom 2: Artensterben -->
-                <div class="fade-in-up card stat-card p-8 rounded-2xl" style="transition-delay: 0.2s;">
-                    <h3 class="text-3xl font-bold gradient-text mb-3">Symptom II: Zelltod</h3>
-                    <p class="text-slate-300 text-lg mb-4">Wir zerstören Lebensräume, vergiften Ökosysteme und jagen Arten bis zur Ausrottung. Dies ist das 6. Massenaussterben der Erdgeschichte – das erste, das von einer einzigen Spezies verursacht wird. Das Netz des Lebens zerreißt.</p>
-                    <div class="text-5xl font-black text-slate-100" data-counter-target="1000" data-suffix="x">0</div>
-                    <p class="text-slate-400 font-semibold">Beschleunigung der Aussterberate im Vergleich zur natürlichen Rate</p>
-                </div>
-                <!-- Symptom 3: Landnahme -->
-                <div class="fade-in-up card stat-card p-8 rounded-2xl" style="transition-delay: 0.4s;">
-                    <h3 class="text-3xl font-bold gradient-text mb-3">Symptom III: Wucherung</h3>
-                    <p class="text-slate-300 text-lg mb-4">Wälder, Feuchtgebiete, Savannen – wir wandeln sie um in Monokulturen, Städte und Minen. Wir fragmentieren die Lebensadern des Planeten, bis nur noch isolierte, sterbende Inseln der Natur übrig sind.</p>
-                     <div class="text-5xl font-black text-slate-100" data-counter-target="75" data-suffix="%">0</div>
-                    <p class="text-slate-400 font-semibold">Der eisfreien Landoberfläche, die signifikant durch Menschen verändert wurde</p>
-                </div>
-                 <!-- Symptom 4: Vergiftung -->
-                <div class="fade-in-up card stat-card p-8 rounded-2xl" style="transition-delay: 0.6s;">
-                    <h3 class="text-3xl font-bold gradient-text mb-3">Symptom IV: Toxizität</h3>
-                    <p class="text-slate-300 text-lg mb-4">Unsere Zivilisation produziert beständige Gifte. Kunststoffe, Chemikalien und Atommüll hinterlassen eine "Technofossil"-Schicht, die für geologische Zeiträume erhalten bleibt. Wir haben eine neue, unzerstörbare Abfallschicht über den Planeten gelegt.</p>
+                <article class="fade-in-up card stat-card p-8 rounded-2xl">
+                    <h3 class="text-3xl font-bold gradient-text mb-3" data-i18n-key="symptom1_title">Symptom I: Fieber</h3>
+                    <p class="text-slate-300 text-lg mb-4" data-i18n-key="symptom1_paragraph">Wir pumpen Treibhausgase in die Atmosphäre, die für Jahrhunderte dort verbleiben. Die Folge: eine globale Erwärmung von beispielloser Geschwindigkeit, die Eisschilde schmilzt, Ozeane versauern lässt und Extremwetter zur neuen Normalität macht.</p>
+                    <div class="text-5xl font-black text-slate-100" data-counter-target="425" data-suffix="+ ppm">0</div>
+                    <p class="text-slate-400 font-semibold" data-i18n-key="symptom1_label">CO₂-Konzentration in der Atmosphäre (Höchster Wert seit min. 800.000 Jahren)</p>
+                </article>
+                <article class="fade-in-up card stat-card p-8 rounded-2xl" style="transition-delay: 0.2s;">
+                    <h3 class="text-3xl font-bold gradient-text mb-3" data-i18n-key="symptom2_title">Symptom II: Zelltod</h3>
+                    <p class="text-slate-300 text-lg mb-4" data-i18n-key="symptom2_paragraph">Wir zerstören Lebensräume, vergiften Ökosysteme und jagen Arten bis zur Ausrottung. Dies ist das 6. Massenaussterben der Erdgeschichte – das erste, das von einer einzigen Spezies verursacht wird. Das Netz des Lebens zerreißt.</p>
+                    <div class="text-5xl font-black text-slate-100" data-counter-target="500" data-suffix="x">0</div>
+                    <p class="text-slate-400 font-semibold" data-i18n-key="symptom2_label">Verhältnis der Aussterberate zur natürlichen Hintergrundrate</p>
+                </article>
+                <article class="fade-in-up card stat-card p-8 rounded-2xl" style="transition-delay: 0.4s;">
+                    <h3 class="text-3xl font-bold gradient-text mb-3" data-i18n-key="symptom3_title">Symptom III: Wucherung</h3>
+                    <p class="text-slate-300 text-lg mb-4" data-i18n-key="symptom3_paragraph">Wälder, Feuchtgebiete, Savannen – wir wandeln sie um in Monokulturen, Städte und Minen. Wir fragmentieren die Lebensadern des Planeten, bis nur noch isolierte, sterbende Inseln der Natur übrig sind.</p>
+                     <div class="text-5xl font-black text-slate-100" data-counter-target="78" data-suffix="%">0</div>
+                    <p class="text-slate-400 font-semibold" data-i18n-key="symptom3_label">Der eisfreien Landoberfläche, die signifikant durch Menschen verändert wurde</p>
+                </article>
+                <article class="fade-in-up card stat-card p-8 rounded-2xl" style="transition-delay: 0.6s;">
+                    <h3 class="text-3xl font-bold gradient-text mb-3" data-i18n-key="symptom4_title">Symptom IV: Toxizität</h3>
+                    <p class="text-slate-300 text-lg mb-4" data-i18n-key="symptom4_paragraph">Unsere Zivilisation produziert beständige Gifte. Kunststoffe, Chemikalien und Atommüll hinterlassen eine "Technofossil"-Schicht, die für geologische Zeiträume erhalten bleibt. Wir haben eine neue, unzerstörbare Abfallschicht über den Planeten gelegt.</p>
                     <div class="text-5xl font-black text-slate-100" data-counter-target="1" data-prefix=">">0</div>
-                    <p class="text-slate-400 font-semibold">Das Verhältnis der Masse aller menschengemachten Objekte zur gesamten Biomasse</p>
-                </div>
+                    <p class="text-slate-400 font-semibold" data-i18n-key="symptom4_label">Das Verhältnis der Masse aller menschengemachten Objekte zur gesamten Biomasse</p>
+                </article>
             </div>
         </section>
 
         <!-- Section 3: Timeline of Inaction -->
-        <section id="timeline" class="container mx-auto px-4 mb-24 md:mb-40 scroll-mt-20">
+        <section id="timeline" class="container mx-auto px-4 mb-24 md:mb-40 scroll-mt-20" aria-labelledby="timeline-title">
             <div class="text-center mb-16 md:mb-20">
-                <h2 class="text-4xl md:text-6xl font-black mb-4 fade-in-up">Chronik der <span class="gradient-text">Ignoranz</span></h2>
-                <p class="text-lg text-slate-400 max-w-4xl mx-auto fade-in-up" style="transition-delay: 0.2s;">Die Warnungen waren da. Deutlich. Seit Jahrzehnten. Doch jede Warnung wurde mit einer weiteren Eskalation der Zerstörung beantwortet. Eine Zeitleiste des vorsätzlichen Wegsehens.</p>
+                <h2 id="timeline-title" class="text-4xl md:text-6xl font-black mb-4 fade-in-up" data-i18n-key="ignorance_title">Chronik der <span class="gradient-text">Ignoranz</span></h2>
+                <p class="text-lg text-slate-400 max-w-4xl mx-auto fade-in-up" style="transition-delay: 0.2s;" data-i18n-key="ignorance_paragraph">Die Warnungen waren da. Deutlich. Seit Jahrzehnten. Doch jede Warnung wurde mit einer weiteren Eskalation der Zerstörung beantwortet. Eine Zeitleiste des vorsätzlichen Wegsehens.</p>
             </div>
             <div class="max-w-3xl mx-auto relative">
                 <div class="relative pl-10 timeline-item fade-in-up">
                     <div class="timeline-dot"></div>
                     <p class="text-sm text-red-400 font-bold">1972</p>
-                    <h4 class="font-bold text-xl text-slate-100">Warnung: "Die Grenzen des Wachstums"</h4>
-                    <p class="text-slate-400">Der Club of Rome publiziert die erste große Studie, die vor den katastrophalen Folgen exponentiellen Wachstums auf einem endlichen Planeten warnt.</p>
-                    <p class="mt-2 text-sm text-slate-500">Globale CO₂-Emissionen: ~15 Gt</p>
+                    <h4 class="font-bold text-xl text-slate-100" data-i18n-key="timeline1_title">Warnung: "Die Grenzen des Wachstums"</h4>
+                    <p class="text-slate-400" data-i18n-key="timeline1_paragraph">Der Club of Rome publiziert die erste große Studie, die vor den katastrophalen Folgen exponentiellen Wachstums auf einem endlichen Planeten warnt.</p>
+                    <p class="mt-2 text-sm text-slate-500" data-i18n-key="timeline1_stat">Globale CO₂-Emissionen: ~15 Gt</p>
                 </div>
                 <div class="relative pl-10 timeline-item fade-in-up">
                     <div class="timeline-dot"></div>
                     <p class="text-sm text-red-400 font-bold">1990</p>
-                    <h4 class="font-bold text-xl text-slate-100">Warnung: Erster IPCC-Bericht</h4>
-                    <p class="text-slate-400">Der Weltklimarat bestätigt den menschlichen Einfluss auf das Klima und fordert "substanzielle Reduktionen" der Emissionen.</p>
-                     <p class="mt-2 text-sm text-slate-500">Globale CO₂-Emissionen: ~22 Gt</p>
+                    <h4 class="font-bold text-xl text-slate-100" data-i18n-key="timeline2_title">Warnung: Erster IPCC-Bericht</h4>
+                    <p class="text-slate-400" data-i18n-key="timeline2_paragraph">Der Weltklimarat bestätigt den menschlichen Einfluss auf das Klima und fordert "substanzielle Reduktionen" der Emissionen.</p>
+                     <p class="mt-2 text-sm text-slate-500" data-i18n-key="timeline2_stat">Globale CO₂-Emissionen: ~22 Gt</p>
                 </div>
                 <div class="relative pl-10 timeline-item fade-in-up">
                     <div class="timeline-dot"></div>
                     <p class="text-sm text-red-400 font-bold">2000</p>
-                    <h4 class="font-bold text-xl text-slate-100">Diagnose: Das "Anthropozän"</h4>
-                    <p class="text-slate-400">Paul Crutzen schlägt den Begriff vor und formalisiert die wissenschaftliche Erkenntnis, dass der Mensch zur dominanten geologischen Kraft geworden ist.</p>
-                     <p class="mt-2 text-sm text-slate-500">Globale CO₂-Emissionen: ~25 Gt</p>
+                    <h4 class="font-bold text-xl text-slate-100" data-i18n-key="timeline3_title">Diagnose: Das "Anthropozän"</h4>
+                    <p class="text-slate-400" data-i18n-key="timeline3_paragraph">Paul Crutzen schlägt den Begriff vor und formalisiert die wissenschaftliche Erkenntnis, dass der Mensch zur dominanten geologischen Kraft geworden ist.</p>
+                     <p class="mt-2 text-sm text-slate-500" data-i18n-key="timeline3_stat">Globale CO₂-Emissionen: ~25 Gt</p>
                 </div>
                 <div class="relative pl-10 timeline-item fade-in-up">
                     <div class="timeline-dot"></div>
                     <p class="text-sm text-red-400 font-bold">2015</p>
-                    <h4 class="font-bold text-xl text-slate-100">Versprechen: Pariser Klimaabkommen</h4>
-                    <p class="text-slate-400">Die Weltgemeinschaft einigt sich auf das Ziel, die Erderwärmung auf deutlich unter 2°C zu begrenzen. Ein Versprechen ohne ausreichende Taten.</p>
-                     <p class="mt-2 text-sm text-slate-500">Globale CO₂-Emissionen: ~35 Gt</p>
+                    <h4 class="font-bold text-xl text-slate-100" data-i18n-key="timeline4_title">Versprechen: Pariser Klimaabkommen</h4>
+                    <p class="text-slate-400" data-i18n-key="timeline4_paragraph">Die Weltgemeinschaft einigt sich auf das Ziel, die Erderwärmung auf deutlich unter 2°C zu begrenzen. Ein Versprechen ohne ausreichende Taten.</p>
+                     <p class="mt-2 text-sm text-slate-500" data-i18n-key="timeline4_stat">Globale CO₂-Emissionen: ~35 Gt</p>
                 </div>
                  <div class="relative pl-10 timeline-item fade-in-up" style="border-left-color: transparent;">
                     <div class="timeline-dot"></div>
-                    <p class="text-sm text-red-400 font-bold">HEUTE</p>
-                    <h4 class="font-bold text-xl text-slate-100">Realität: Ungebremste Eskalation</h4>
-                    <p class="text-slate-400">Trotz aller Warnungen, Diagnosen und Versprechen erreichen die Emissionen und die Zerstörung immer neue Höchststände. Die Ignoranz ist systemisch.</p>
-                     <p class="mt-2 text-sm text-slate-500">Globale CO₂-Emissionen: >37 Gt</p>
+                    <p class="text-sm text-red-400 font-bold" data-i18n-key="timeline5_year">HEUTE</p>
+                    <h4 class="font-bold text-xl text-slate-100" data-i18n-key="timeline5_title">Realität: Ungebremste Eskalation</h4>
+                    <p class="text-slate-400" data-i18n-key="timeline5_paragraph">Trotz aller Warnungen, Diagnosen und Versprechen erreichen die Emissionen und die Zerstörung immer neue Höchststände. Die Ignoranz ist systemisch.</p>
+                     <p class="mt-2 text-sm text-slate-500" data-i18n-key="timeline5_stat">Globale CO₂-Emissionen: >37 Gt</p>
                 </div>
             </div>
         </section>
 
         <!-- Section 4: The Parasite Analogy -->
-        <section id="parasite" class="bg-slate-900/50 py-20 md:py-32 scroll-mt-20">
+        <section id="parasite" class="bg-slate-900/50 py-20 md:py-32 scroll-mt-20" aria-labelledby="parasite-title">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl md:text-6xl font-black mb-4 fade-in-up"><span class="gradient-text">Die Anatomie</span> eines Parasiten</h2>
-                <p class="text-lg text-slate-400 max-w-4xl mx-auto mb-16 fade-in-up" style="transition-delay: 0.2s;">Ein Parasit entzieht seinem Wirt Ressourcen, um zu wachsen. Er gibt nichts zurück. Sein Abfall vergiftet den Wirt. Sein unkontrolliertes Wachstum führt unweigerlich zur Schwächung oder zum Tod des Wirtes. <br class="hidden md:block"> Sehen Sie die Parallelen?</p>
+                <h2 id="parasite-title" class="text-4xl md:text-6xl font-black mb-4 fade-in-up" data-i18n-key="anatomy_title"><span class="gradient-text">Die Anatomie</span> eines Parasiten</h2>
+                <p class="text-lg text-slate-400 max-w-4xl mx-auto mb-16 fade-in-up" style="transition-delay: 0.2s;" data-i18n-key="anatomy_paragraph">Ein Parasit entzieht seinem Wirt Ressourcen, um zu wachsen. Er gibt nichts zurück. Sein Abfall vergiftet den Wirt. Sein unkontrolliertes Wachstum führt unweigerlich zur Schwächung oder zum Tod des Wirtes. <br class="hidden md:block"> Sehen Sie die Parallelen?</p>
                 
                 <div class="fade-in-up" style="transition-delay: 0.4s;">
-                    <div class="earth-container">
+                    <div class="earth-container" aria-hidden="true">
                         <div id="earth-sphere"></div>
-                        <!-- Veins will be added by JS -->
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto">
                         <div class="text-center">
-                            <h4 class="text-xl font-bold text-slate-100">Extraktion</h4>
-                            <p class="text-slate-400">Wir bohren, graben und roden, um den Hunger nach Energie und Rohstoffen zu stillen. Arterien des Planeten werden zu unseren Versorgungsleitungen.</p>
+                            <h4 class="text-xl font-bold text-slate-100" data-i18n-key="anatomy_step1_title">Extraktion</h4>
+                            <p class="text-slate-400" data-i18n-key="anatomy_step1_paragraph">Wir bohren, graben und roden, um den Hunger nach Energie und Rohstoffen zu stillen. Arterien des Planeten werden zu unseren Versorgungsleitungen.</p>
                         </div>
                         <div class="text-center">
-                            <h4 class="text-xl font-bold text-slate-100">Metabolismus</h4>
-                            <p class="text-slate-400">Unsere Wirtschaft verwandelt Ressourcen in kurzlebige Produkte und eine immense Menge an Abfall – unseren toxischen Stoffwechsel.</p>
+                            <h4 class="text-xl font-bold text-slate-100" data-i18n-key="anatomy_step2_title">Metabolismus</h4>
+                            <p class="text-slate-400" data-i18n-key="anatomy_step2_paragraph">Unsere Wirtschaft verwandelt Ressourcen in kurzlebige Produkte und eine immense Menge an Abfall – unseren toxischen Stoffwechsel.</p>
                         </div>
                         <div class="text-center">
-                            <h4 class="text-xl font-bold text-slate-100">Exkretion</h4>
-                            <p class="text-slate-400">CO₂, Plastik, Chemikalien. Unsere Abfälle werden in die Atmosphäre, die Ozeane und die Böden ausgeschieden und vergiften das System, das uns am Leben erhält.</p>
+                            <h4 class="text-xl font-bold text-slate-100" data-i18n-key="anatomy_step3_title">Exkretion</h4>
+                            <p class="text-slate-400" data-i18n-key="anatomy_step3_paragraph">CO₂, Plastik, Chemikalien. Unsere Abfälle werden in die Atmosphäre, die Ozeane und die Böden ausgeschieden und vergiften das System, das uns am Leben erhält.</p>
                         </div>
                     </div>
                 </div>
@@ -330,9 +480,9 @@
         </section>
 
         <!-- Section 5: The Crossroads -->
-        <section id="crossroads" class="container mx-auto px-4 text-center py-20 md:py-32 scroll-mt-20">
-            <h2 class="text-4xl md:text-6xl font-black tracking-tighter fade-in-up">Vom <span class="gradient-text">Parasit</span> zum <span class="gradient-text">Hüter?</span></h2>
-            <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mt-6 leading-relaxed fade-in-up" style="transition-delay: 0.2s;">
+        <section id="crossroads" class="container mx-auto px-4 text-center py-20 md:py-32 scroll-mt-20" aria-labelledby="crossroads-title">
+            <h2 id="crossroads-title" class="text-4xl md:text-6xl font-black tracking-tighter fade-in-up" data-i18n-key="crossroads_title">Vom <span class="gradient-text">Parasit</span> zum <span class="gradient-text">Hüter?</span></h2>
+            <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mt-6 leading-relaxed fade-in-up" style="transition-delay: 0.2s;" data-i18n-key="crossroads_paragraph">
                 Die Diagnose ist gestellt. Die Akte ist vollständig. Kein anderes Lebewesen kann seine Rolle reflektieren und bewusst verändern. Diese einzigartige Fähigkeit ist die letzte, winzige Hoffnung in der Bilanz des Anthropozäns. Die Frage ist nicht mehr, was wir wissen. Sondern, wer wir sein wollen.
             </p>
         </section>
@@ -340,155 +490,464 @@
     </main>
 
     <footer class="text-center py-8 border-t border-slate-800 bg-black">
-        <p class="text-slate-500 text-sm">Diese Infografik ist eine Synthese basierend auf Daten und Erkenntnissen aus den bereitgestellten Dokumenten zum Anthropozän.</p>
-         <p class="text-xs text-slate-600 mt-2">Quellen u.a.: IPCC, IPBES, Anthropocene Working Group, Crutzen & Stoermer.</p>
+        <p class="text-slate-500 text-sm" data-i18n-key="footer_main">Diese Infografik ist eine Synthese basierend auf Daten und Erkenntnissen aus den bereitgestellten Dokumenten zum Anthropozän.</p>
+        <p class="text-xs text-slate-600 mt-2" data-i18n-key="footer_sources">Quellen u.a.: IPCC, IPBES, Anthropocene Working Group, Crutzen & Stoermer.</p>
     </footer>
 
+    <!-- 
+        =====================================================================
+        CATEGORY: PERFORMANCE & CODE QUALITY / JAVASCRIPT
+        =====================================================================
+        - The JavaScript is modularized using IIFEs for clean scope management.
+        - For a production environment, this script should be:
+          1. Extracted to an external file (e.g., app.js) for caching.
+          2. Minified using a tool like Terser to reduce its size.
+          3. Potentially bundled and transpiled for older browser support if needed.
+        - DOM elements are cached for better performance.
+        - Internationalization (i18n) is fully implemented.
+        - Browser language detection sets the initial language automatically.
+    -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         
-        // --- Particle.js Hero Background ---
-        particlesJS('particles-js', {
-          "particles": { "number": { "value": 80, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#ef4444" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } }, "size": { "value": 2.5, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#475569", "opacity": 0.2, "width": 1 }, "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false }, "resize": true }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } } }, "retina_detect": true });
+        // --- I18N (Internationalization) Module ---
+        const i18nModule = (() => {
+            const translations = {
+                // German (DE) - Base Language
+                de: {
+                    "page_title": "Das Anthropozän: Akte des Parasiten",
+                    "meta_description": "Eine ungeschönte Diagnose unseres Zeitalters. Eine interaktive Infografik über die erdrückenden Ausmaße des Anthropozäns und die Rolle der Menschheit.",
+                    "og_title": "Das Anthropozän: Akte des Parasiten",
+                    "og_description": "Eine ungeschönte Diagnose unseres Zeitalters. Eine interaktive Infografik über die erdrückenden Ausmaße des Anthropozäns und die Rolle der Menschheit.",
+                    "aria_lang_select": "Sprachauswahl",
+                    "nav_brand": "Akte des Parasiten", "nav_home": "Home", "nav_acceleration": "Beschleunigung", "nav_symptoms": "Symptome", "nav_ignorance": "Ignoranz", "nav_anatomy": "Anatomie", "nav_crossroads": "Scheideweg",
+                    "sr_open_menu": "Hauptmenü öffnen",
+                    "hero_title": "Die Erde hat einen <span class=\"gradient-text\">Parasiten.</span>", "hero_subtitle": "Uns.", "hero_paragraph": "Dies ist keine Meinung. Dies ist eine Akte, zusammengestellt aus den geologischen Spuren und den Daten, die wir hinterlassen. Eine ungeschönte Diagnose unseres Zeitalters: dem Anthropozän.",
+                    "acceleration_title": "Die <span class=\"gradient-text\">Große Beschleunigung</span>", "acceleration_paragraph": "Ab ca. 1950 explodierte die menschliche Aktivität. Ein Wendepunkt, der den Planeten aus seinem 12.000 Jahre alten Gleichgewicht riss und eine neue, volatile geologische Epoche einleitete. Die Graphen lügen nicht.",
+                    "aria_chart_population": "Diagramm: Weltbevölkerung von 1800 bis 2025 in Milliarden", "aria_chart_co2": "Diagramm: CO₂-Konzentration in ppm von 1800 bis 2025", "aria_chart_extinction": "Balkendiagramm: Aussterberate im Vergleich zur Hintergrundrate", "aria_chart_plastic": "Diagramm: Plastikproduktion in Millionen Tonnen von 1950 bis 2024",
+                    "chart_population": "Weltbevölkerung (Mrd.)", "chart_co2": "CO₂-Konzentration (ppm)", "chart_extinction": "Aussterberate (Faktor)", "chart_plastic": "Plastikproduktion (Mio. t)", "chart_label_background": "Hintergrundrate", "chart_label_current": "Aktuelle Rate",
+                    "symptoms_title": "Die Symptome des Befalls", "symptoms_paragraph": "Jede Handlung hinterlässt eine Narbe. Wir nennen es Entwicklung. Die Erde nennt es Fieber, Vergiftung und Zerstörung. Vier Kernsymptome einer planetaren Krankheit.",
+                    "symptom1_title": "Symptom I: Fieber", "symptom1_paragraph": "Wir pumpen Treibhausgase in die Atmosphäre, die für Jahrhunderte dort verbleiben. Die Folge: eine globale Erwärmung von beispielloser Geschwindigkeit, die Eisschilde schmilzt, Ozeane versauern lässt und Extremwetter zur neuen Normalität macht.", "symptom1_label": "CO₂-Konzentration in der Atmosphäre (Höchster Wert seit min. 800.000 Jahren)",
+                    "symptom2_title": "Symptom II: Zelltod", "symptom2_paragraph": "Wir zerstören Lebensräume, vergiften Ökosysteme und jagen Arten bis zur Ausrottung. Dies ist das 6. Massenaussterben der Erdgeschichte – das erste, das von einer einzigen Spezies verursacht wird. Das Netz des Lebens zerreißt.", "symptom2_label": "Verhältnis der Aussterberate zur natürlichen Hintergrundrate",
+                    "symptom3_title": "Symptom III: Wucherung", "symptom3_paragraph": "Wälder, Feuchtgebiete, Savannen – wir wandeln sie um in Monokulturen, Städte und Minen. Wir fragmentieren die Lebensadern des Planeten, bis nur noch isolierte, sterbende Inseln der Natur übrig sind.", "symptom3_label": "Der eisfreien Landoberfläche, die signifikant durch Menschen verändert wurde",
+                    "symptom4_title": "Symptom IV: Toxizität", "symptom4_paragraph": "Unsere Zivilisation produziert beständige Gifte. Kunststoffe, Chemikalien und Atommüll hinterlassen eine \"Technofossil\"-Schicht, die für geologische Zeiträume erhalten bleibt. Wir haben eine neue, unzerstörbare Abfallschicht über den Planeten gelegt.", "symptom4_label": "Das Verhältnis der Masse aller menschengemachten Objekte zur gesamten Biomasse",
+                    "ignorance_title": "Chronik der <span class=\"gradient-text\">Ignoranz</span>", "ignorance_paragraph": "Die Warnungen waren da. Deutlich. Seit Jahrzehnten. Doch jede Warnung wurde mit einer weiteren Eskalation der Zerstörung beantwortet. Eine Zeitleiste des vorsätzlichen Wegsehens.",
+                    "timeline1_title": "Warnung: \"Die Grenzen des Wachstums\"", "timeline1_paragraph": "Der Club of Rome publiziert die erste große Studie, die vor den katastrophalen Folgen exponentiellen Wachstums auf einem endlichen Planeten warnt.", "timeline1_stat": "Globale CO₂-Emissionen: ~15 Gt",
+                    "timeline2_title": "Warnung: Erster IPCC-Bericht", "timeline2_paragraph": "Der Weltklimarat bestätigt den menschlichen Einfluss auf das Klima und fordert \"substanzielle Reduktionen\" der Emissionen.", "timeline2_stat": "Globale CO₂-Emissionen: ~22 Gt",
+                    "timeline3_title": "Diagnose: Das \"Anthropozän\"", "timeline3_paragraph": "Paul Crutzen schlägt den Begriff vor und formalisiert die wissenschaftliche Erkenntnis, dass der Mensch zur dominanten geologischen Kraft geworden ist.", "timeline3_stat": "Globale CO₂-Emissionen: ~25 Gt",
+                    "timeline4_title": "Versprechen: Pariser Klimaabkommen", "timeline4_paragraph": "Die Weltgemeinschaft einigt sich auf das Ziel, die Erderwärmung auf deutlich unter 2°C zu begrenzen. Ein Versprechen ohne ausreichende Taten.", "timeline4_stat": "Globale CO₂-Emissionen: ~35 Gt",
+                    "timeline5_year": "HEUTE", "timeline5_title": "Realität: Ungebremste Eskalation", "timeline5_paragraph": "Trotz aller Warnungen, Diagnosen und Versprechen erreichen die Emissionen und die Zerstörung immer neue Höchststände. Die Ignoranz ist systemisch.", "timeline5_stat": "Globale CO₂-Emissionen: >37 Gt",
+                    "anatomy_title": "<span class=\"gradient-text\">Die Anatomie</span> eines Parasiten", "anatomy_paragraph": "Ein Parasit entzieht seinem Wirt Ressourcen, um zu wachsen. Er gibt nichts zurück. Sein Abfall vergiftet den Wirt. Sein unkontrolliertes Wachstum führt unweigerlich zur Schwächung oder zum Tod des Wirtes. <br class=\"hidden md:block\"> Sehen Sie die Parallelen?",
+                    "anatomy_step1_title": "Extraktion", "anatomy_step1_paragraph": "Wir bohren, graben und roden, um den Hunger nach Energie und Rohstoffen zu stillen. Arterien des Planeten werden zu unseren Versorgungsleitungen.",
+                    "anatomy_step2_title": "Metabolismus", "anatomy_step2_paragraph": "Unsere Wirtschaft verwandelt Ressourcen in kurzlebige Produkte und eine immense Menge an Abfall – unseren toxischen Stoffwechsel.",
+                    "anatomy_step3_title": "Exkretion", "anatomy_step3_paragraph": "CO₂, Plastik, Chemikalien. Unsere Abfälle werden in die Atmosphäre, die Ozeane und die Böden ausgeschieden und vergiften das System, das uns am Leben erhält.",
+                    "crossroads_title": "Vom <span class=\"gradient-text\">Parasit</span> zum <span class=\"gradient-text\">Hüter?</span>", "crossroads_paragraph": "Die Diagnose ist gestellt. Die Akte ist vollständig. Kein anderes Lebewesen kann seine Rolle reflektieren und bewusst verändern. Diese einzigartige Fähigkeit ist die letzte, winzige Hoffnung in der Bilanz des Anthropozäns. Die Frage ist nicht mehr, was wir wissen. Sondern, wer wir sein wollen.",
+                    "footer_main": "Diese Infografik ist eine Synthese basierend auf Daten und Erkenntnissen aus den bereitgestellten Dokumenten zum Anthropozän.", "footer_sources": "Quellen u.a.: IPCC, IPBES, Anthropocene Working Group, Crutzen & Stoermer."
+                },
+                // English (EN)
+                en: {
+                    "page_title": "The Anthropocene: Dossier of the Parasite",
+                    "meta_description": "An unfiltered diagnosis of our age. An interactive infographic on the overwhelming scale of the Anthropocene and humanity's role within it.",
+                    "og_title": "The Anthropocene: Dossier of the Parasite",
+                    "og_description": "An unfiltered diagnosis of our age. An interactive infographic on the overwhelming scale of the Anthropocene and humanity's role within it.",
+                    "aria_lang_select": "Language Selection",
+                    "nav_brand": "Dossier of the Parasite", "nav_home": "Home", "nav_acceleration": "Acceleration", "nav_symptoms": "Symptoms", "nav_ignorance": "Ignorance", "nav_anatomy": "Anatomy", "nav_crossroads": "Crossroads",
+                    "sr_open_menu": "Open main menu",
+                    "hero_title": "The Earth has a <span class=\"gradient-text\">parasite.</span>", "hero_subtitle": "Us.", "hero_paragraph": "This is not an opinion. This is a dossier, compiled from the geological traces and the data we leave behind. An unfiltered diagnosis of our age: the Anthropocene.",
+                    "acceleration_title": "The <span class=\"gradient-text\">Great Acceleration</span>", "acceleration_paragraph": "Around 1950, human activity exploded. A turning point that knocked the planet out of its 12,000-year equilibrium, initiating a new, volatile geological epoch. The graphs don't lie.",
+                    "aria_chart_population": "Chart: World population from 1800 to 2025 in billions", "aria_chart_co2": "Chart: CO₂ concentration in ppm from 1800 to 2025", "aria_chart_extinction": "Bar chart: Extinction rate compared to background rate", "aria_chart_plastic": "Chart: Plastic production in million tons from 1950 to 2024",
+                    "chart_population": "World Population (bn)", "chart_co2": "CO₂ Concentration (ppm)", "chart_extinction": "Extinction Rate (Factor)", "chart_plastic": "Plastic Production (M t)", "chart_label_background": "Background Rate", "chart_label_current": "Current Rate",
+                    "symptoms_title": "Symptoms of the Infection", "symptoms_paragraph": "Every action leaves a scar. We call it development. The Earth calls it fever, poisoning, and destruction. Four core symptoms of a planetary disease.",
+                    "symptom1_title": "Symptom I: Fever", "symptom1_paragraph": "We pump greenhouse gases into the atmosphere, where they remain for centuries. The result: global warming at an unprecedented speed, melting ice sheets, acidifying oceans, and making extreme weather the new normal.", "symptom1_label": "CO₂ concentration in the atmosphere (Highest in at least 800,000 years)",
+                    "symptom2_title": "Symptom II: Cell Death", "symptom2_paragraph": "We destroy habitats, poison ecosystems, and hunt species to extinction. This is the 6th mass extinction in Earth's history—the first caused by a single species. The web of life is tearing apart.", "symptom2_label": "Ratio of extinction rate to the natural background rate",
+                    "symptom3_title": "Symptom III: Overgrowth", "symptom3_paragraph": "Forests, wetlands, savannas—we convert them into monocultures, cities, and mines. We fragment the planet's lifelines until only isolated, dying islands of nature remain.", "symptom3_label": "Of the ice-free land surface significantly altered by humans",
+                    "symptom4_title": "Symptom IV: Toxicity", "symptom4_paragraph": "Our civilization produces persistent poisons. Plastics, chemicals, and nuclear waste leave a \"technofossil\" layer that will endure for geological ages. We have laid a new, indestructible layer of waste across the planet.", "symptom4_label": "The ratio of the mass of all man-made objects to all living biomass",
+                    "ignorance_title": "Chronicle of <span class=\"gradient-text\">Ignorance</span>", "ignorance_paragraph": "The warnings were there. Clear. For decades. Yet every warning was met with a further escalation of destruction. A timeline of deliberate disregard.",
+                    "timeline1_title": "Warning: \"The Limits to Growth\"", "timeline1_paragraph": "The Club of Rome publishes the first major study warning of the catastrophic consequences of exponential growth on a finite planet.", "timeline1_stat": "Global CO₂ Emissions: ~15 Gt",
+                    "timeline2_title": "Warning: First IPCC Report", "timeline2_paragraph": "The Intergovernmental Panel on Climate Change confirms human influence on the climate and calls for \"substantial reductions\" in emissions.", "timeline2_stat": "Global CO₂ Emissions: ~22 Gt",
+                    "timeline3_title": "Diagnosis: The \"Anthropocene\"", "timeline3_paragraph": "Paul Crutzen proposes the term, formalizing the scientific consensus that humans have become the dominant geological force.", "timeline3_stat": "Global CO₂ Emissions: ~25 Gt",
+                    "timeline4_title": "Promise: Paris Agreement", "timeline4_paragraph": "The global community agrees to limit global warming to well below 2°C. A promise not backed by sufficient action.", "timeline4_stat": "Global CO₂ Emissions: ~35 Gt",
+                    "timeline5_year": "TODAY", "timeline5_title": "Reality: Unchecked Escalation", "timeline5_paragraph": "Despite all warnings, diagnoses, and promises, emissions and destruction continue to reach new highs. The ignorance is systemic.", "timeline5_stat": "Global CO₂ Emissions: >37 Gt",
+                    "anatomy_title": "<span class=\"gradient-text\">Anatomy</span> of a Parasite", "anatomy_paragraph": "A parasite extracts resources from its host to grow. It gives nothing back. Its waste poisons the host. Its uncontrolled growth inevitably leads to the host's weakening or death. <br class=\"hidden md:block\"> See the parallels?",
+                    "anatomy_step1_title": "Extraction", "anatomy_step1_paragraph": "We drill, dig, and clear-cut to satisfy our hunger for energy and raw materials. The planet's arteries become our supply lines.",
+                    "anatomy_step2_title": "Metabolism", "anatomy_step2_paragraph": "Our economy transforms resources into short-lived products and an immense amount of waste—our toxic metabolism.",
+                    "anatomy_step3_title": "Excretion", "anatomy_step3_paragraph": "CO₂, plastic, chemicals. Our waste is excreted into the atmosphere, oceans, and soils, poisoning the very system that keeps us alive.",
+                    "crossroads_title": "From <span class=\"gradient-text\">Parasite</span> to <span class=\"gradient-text\">Guardian?</span>", "crossroads_paragraph": "The diagnosis has been made. The file is complete. No other creature can reflect on its role and consciously change it. This unique ability is the last, tiny hope in the balance sheet of the Anthropocene. The question is no longer what we know. But who we want to be.",
+                    "footer_main": "This infographic is a synthesis based on data and findings from the provided documents on the Anthropocene.", "footer_sources": "Sources include: IPCC, IPBES, Anthropocene Working Group, Crutzen & Stoermer."
+                },
+                // Spanish (ES)
+                es: {
+                    "page_title": "El Antropoceno: Expediente del Parásito", "meta_description": "Un diagnóstico sin filtros de nuestra era. Una infografía interactiva sobre la abrumadora escala del Antropoceno y el papel de la humanidad.", "og_title": "El Antropoceno: Expediente del Parásito", "og_description": "Un diagnóstico sin filtros de nuestra era. Una infografía interactiva sobre la abrumadora escala del Antropoceno y el papel de la humanidad.",
+                    "aria_lang_select": "Selección de idioma",
+                    "nav_brand": "Expediente del Parásito", "nav_home": "Inicio", "nav_acceleration": "Aceleración", "nav_symptoms": "Síntomas", "nav_ignorance": "Ignorancia", "nav_anatomy": "Anatomía", "nav_crossroads": "Encrucijada",
+                    "sr_open_menu": "Abrir menú principal",
+                    "hero_title": "La Tierra tiene un <span class=\"gradient-text\">parásito.</span>", "hero_subtitle": "Nosotros.", "hero_paragraph": "Esto no es una opinión. Es un expediente, compilado a partir de las huellas geológicas y los datos que dejamos. Un diagnóstico sin filtros de nuestra era: el Antropoceno.",
+                    "acceleration_title": "La <span class=\"gradient-text\">Gran Aceleración</span>", "acceleration_paragraph": "Alrededor de 1950, la actividad humana explotó. Un punto de inflexión que sacó al planeta de su equilibrio de 12.000 años, iniciando una nueva y volátil época geológica. Los gráficos no mienten.",
+                    "aria_chart_population": "Gráfico: Población mundial de 1800 a 2025 en miles de millones", "aria_chart_co2": "Gráfico: Concentración de CO₂ en ppm de 1800 a 2025", "aria_chart_extinction": "Gráfico de barras: Tasa de extinción comparada con la tasa de fondo", "aria_chart_plastic": "Gráfico: Producción de plástico en millones de toneladas de 1950 a 2024",
+                    "chart_population": "Población Mundial (mil millones)", "chart_co2": "Concentración de CO₂ (ppm)", "chart_extinction": "Tasa de Extinción (Factor)", "chart_plastic": "Producción de Plástico (M t)", "chart_label_background": "Tasa de Fondo", "chart_label_current": "Tasa Actual",
+                    "symptoms_title": "Síntomas de la Infección", "symptoms_paragraph": "Cada acción deja una cicatriz. Lo llamamos desarrollo. La Tierra lo llama fiebre, envenenamiento y destrucción. Cuatro síntomas centrales de una enfermedad planetaria.",
+                    "symptom1_title": "Síntoma I: Fiebre", "symptom1_paragraph": "Bombeamos gases de efecto invernadero a la atmósfera, donde permanecen durante siglos. El resultado: un calentamiento global a una velocidad sin precedentes, que derrite los casquetes polares, acidifica los océanos y convierte el clima extremo en la nueva normalidad.", "symptom1_label": "Concentración de CO₂ en la atmósfera (la más alta en al menos 800.000 años)",
+                    "symptom2_title": "Síntoma II: Muerte Celular", "symptom2_paragraph": "Destruimos hábitats, envenenamos ecosistemas y cazamos especies hasta la extinción. Esta es la sexta extinción masiva en la historia de la Tierra, la primera causada por una sola especie. La red de la vida se desgarra.", "symptom2_label": "Relación entre la tasa de extinción y la tasa natural de fondo",
+                    "symptom3_title": "Síntoma III: Proliferación", "symptom3_paragraph": "Bosques, humedales, sabanas: los convertimos en monocultivos, ciudades y minas. Fragmentamos las arterias vitales del planeta hasta que solo quedan islas de naturaleza aisladas y moribundas.", "symptom3_label": "De la superficie terrestre libre de hielo alterada significativamente por los humanos",
+                    "symptom4_title": "Síntoma IV: Toxicidad", "symptom4_paragraph": "Nuestra civilización produce venenos persistentes. Plásticos, productos químicos y desechos nucleares dejan una capa de \"tecnofósiles\" que perdurará por eras geológicas. Hemos extendido una nueva e indestructible capa de residuos por todo el planeta.", "symptom4_label": "La relación entre la masa de todos los objetos artificiales y toda la biomasa viva",
+                    "ignorance_title": "Crónica de la <span class=\"gradient-text\">Ignorancia</span>", "ignorance_paragraph": "Las advertencias estaban ahí. Claras. Durante décadas. Sin embargo, cada advertencia fue respondida con una mayor escalada de destrucción. Una cronología del desprecio deliberado.",
+                    "timeline1_title": "Advertencia: \"Los Límites del Crecimiento\"", "timeline1_paragraph": "El Club de Roma publica el primer gran estudio que advierte sobre las consecuencias catastróficas del crecimiento exponencial en un planeta finito.", "timeline1_stat": "Emisiones Globales de CO₂: ~15 Gt",
+                    "timeline2_title": "Advertencia: Primer Informe del IPCC", "timeline2_paragraph": "El Panel Intergubernamental sobre el Cambio Climático confirma la influencia humana en el clima y pide \"reducciones sustanciales\" de las emisiones.", "timeline2_stat": "Emisiones Globales de CO₂: ~22 Gt",
+                    "timeline3_title": "Diagnóstico: El \"Antropoceno\"", "timeline3_paragraph": "Paul Crutzen propone el término, formalizando el consenso científico de que los humanos se han convertido en la fuerza geológica dominante.", "timeline3_stat": "Emisiones Globales de CO₂: ~25 Gt",
+                    "timeline4_title": "Promesa: Acuerdo de París", "timeline4_paragraph": "La comunidad mundial acuerda limitar el calentamiento global muy por debajo de los 2°C. Una promesa no respaldada por acciones suficientes.", "timeline4_stat": "Emisiones Globales de CO₂: ~35 Gt",
+                    "timeline5_year": "HOY", "timeline5_title": "Realidad: Escalada Incontrolada", "timeline5_paragraph": "A pesar de todas las advertencias, diagnósticos y promesas, las emisiones y la destrucción continúan alcanzando nuevos máximos. La ignorancia es sistémica.", "timeline5_stat": "Emisiones Globales de CO₂: >37 Gt",
+                    "anatomy_title": "<span class=\"gradient-text\">Anatomía</span> de un Parásito", "anatomy_paragraph": "Un parásito extrae recursos de su huésped para crecer. No devuelve nada. Sus desechos envenenan al huésped. Su crecimiento incontrolado conduce inevitablemente al debilitamiento o la muerte del huésped. <br class=\"hidden md:block\"> ¿Ves los paralelismos?",
+                    "anatomy_step1_title": "Extracción", "anatomy_step1_paragraph": "Perforamos, cavamos y talamos para satisfacer nuestra hambre de energía y materias primas. Las arterias del planeta se convierten en nuestras líneas de suministro.",
+                    "anatomy_step2_title": "Metabolismo", "anatomy_step2_paragraph": "Nuestra economía transforma los recursos en productos de corta vida y una inmensa cantidad de residuos: nuestro metabolismo tóxico.",
+                    "anatomy_step3_title": "Excreción", "anatomy_step3_paragraph": "CO₂, plástico, productos químicos. Nuestros desechos se excretan en la atmósfera, los océanos y los suelos, envenenando el mismo sistema que nos mantiene vivos.",
+                    "crossroads_title": "¿De <span class=\"gradient-text\">Parásito</span> a <span class=\"gradient-text\">Guardián?</span>", "crossroads_paragraph": "El diagnóstico está hecho. El expediente está completo. Ninguna otra criatura puede reflexionar sobre su papel y cambiarlo conscientemente. Esta habilidad única es la última y diminuta esperanza en el balance del Antropoceno. La pregunta ya no es qué sabemos. Sino quiénes queremos ser.",
+                    "footer_main": "Esta infografía es una síntesis basada en datos y hallazgos de los documentos proporcionados sobre el Antropoceno.", "footer_sources": "Fuentes incluyen: IPCC, IPBES, Grupo de Trabajo del Antropoceno, Crutzen & Stoermer."
+                },
+                // French (FR)
+                fr: {
+                    "page_title": "L'Anthropocène : Dossier du Parasite", "meta_description": "Un diagnostic sans filtre de notre époque. Une infographie interactive sur l'ampleur écrasante de l'Anthropocène et le rôle de l'humanité.", "og_title": "L'Anthropocène : Dossier du Parasite", "og_description": "Un diagnostic sans filtre de notre époque. Une infographie interactive sur l'ampleur écrasante de l'Anthropocène et le rôle de l'humanité.",
+                    "aria_lang_select": "Sélection de la langue",
+                    "nav_brand": "Dossier du Parasite", "nav_home": "Accueil", "nav_acceleration": "Accélération", "nav_symptoms": "Symptômes", "nav_ignorance": "Ignorance", "nav_anatomy": "Anatomie", "nav_crossroads": "Carrefour",
+                    "sr_open_menu": "Ouvrir le menu principal",
+                    "hero_title": "La Terre a un <span class=\"gradient-text\">parasite.</span>", "hero_subtitle": "Nous.", "hero_paragraph": "Ceci n'est pas une opinion. C'est un dossier, compilé à partir des traces géologiques et des données que nous laissons. Un diagnostic sans filtre de notre époque : l'Anthropocène.",
+                    "acceleration_title": "La <span class=\"gradient-text\">Grande Accélération</span>", "acceleration_paragraph": "Vers 1950, l'activité humaine a explosé. Un tournant qui a sorti la planète de son équilibre de 12 000 ans, inaugurant une nouvelle époque géologique volatile. Les graphiques ne mentent pas.",
+                    "aria_chart_population": "Graphique : Population mondiale de 1800 à 2025 en milliards", "aria_chart_co2": "Graphique : Concentration de CO₂ en ppm de 1800 à 2025", "aria_chart_extinction": "Diagramme à barres : Taux d'extinction comparé au taux de fond", "aria_chart_plastic": "Graphique : Production de plastique en millions de tonnes de 1950 à 2024",
+                    "chart_population": "Population mondiale (milliards)", "chart_co2": "Concentration de CO₂ (ppm)", "chart_extinction": "Taux d'extinction (Facteur)", "chart_plastic": "Production de plastique (M t)", "chart_label_background": "Taux de fond", "chart_label_current": "Taux actuel",
+                    "symptoms_title": "Symptômes de l'infection", "symptoms_paragraph": "Chaque action laisse une cicatrice. Nous appelons cela le développement. La Terre l'appelle fièvre, empoisonnement et destruction. Quatre symptômes principaux d'une maladie planétaire.",
+                    "symptom1_title": "Symptôme I : Fièvre", "symptom1_paragraph": "Nous pompons des gaz à effet de serre dans l'atmosphère, où ils restent pendant des siècles. Le résultat : un réchauffement climatique d'une vitesse sans précédent, faisant fondre les calottes glaciaires, acidifiant les océans et faisant des conditions météorologiques extrêmes la nouvelle norme.", "symptom1_label": "Concentration de CO₂ dans l'atmosphère (la plus élevée depuis au moins 800 000 ans)",
+                    "symptom2_title": "Symptôme II : Mort cellulaire", "symptom2_paragraph": "Nous détruisons les habitats, empoisonnons les écosystèmes et chassons les espèces jusqu'à l'extinction. C'est la 6ème extinction de masse de l'histoire de la Terre - la première causée par une seule espèce. Le tissu de la vie se déchire.", "symptom2_label": "Rapport entre le taux d'extinction et le taux de fond naturel",
+                    "symptom3_title": "Symptôme III : Prolifération", "symptom3_paragraph": "Forêts, zones humides, savanes - nous les transformons en monocultures, villes et mines. Nous fragmentons les lignes de vie de la planète jusqu'à ce qu'il ne reste que des îles de nature isolées et mourantes.", "symptom3_label": "De la surface terrestre libre de glace significativement modifiée par l'homme",
+                    "symptom4_title": "Symptôme IV : Toxicité", "symptom4_paragraph": "Notre civilisation produit des poisons persistants. Les plastiques, les produits chimiques et les déchets nucléaires laissent une couche de \"technofossiles\" qui perdurera pendant des ères géologiques. Nous avons déposé une nouvelle couche de déchets indestructible sur la planète.", "symptom4_label": "Le rapport entre la masse de tous les objets fabriqués par l'homme et l'ensemble de la biomasse vivante",
+                    "ignorance_title": "Chronique de l'<span class=\"gradient-text\">Ignorance</span>", "ignorance_paragraph": "Les avertissements étaient là. Clairs. Depuis des décennies. Pourtant, chaque avertissement a été suivi d'une nouvelle escalade de la destruction. Une chronologie du mépris délibéré.",
+                    "timeline1_title": "Avertissement : \"Les Limites à la Croissance\"", "timeline1_paragraph": "Le Club de Rome publie la première grande étude avertissant des conséquences catastrophiques de la croissance exponentielle sur une planète finie.", "timeline1_stat": "Émissions mondiales de CO₂ : ~15 Gt",
+                    "timeline2_title": "Avertissement : Premier rapport du GIEC", "timeline2_paragraph": "Le Groupe d'experts intergouvernemental sur l'évolution du climat confirme l'influence humaine sur le climat et appelle à des \"réductions substantielles\" des émissions.", "timeline2_stat": "Émissions mondiales de CO₂ : ~22 Gt",
+                    "timeline3_title": "Diagnostic : L'\"Anthropocène\"", "timeline3_paragraph": "Paul Crutzen propose le terme, formalisant le consensus scientifique selon lequel les humains sont devenus la force géologique dominante.", "timeline3_stat": "Émissions mondiales de CO₂ : ~25 Gt",
+                    "timeline4_title": "Promesse : Accord de Paris", "timeline4_paragraph": "La communauté mondiale s'accorde à limiter le réchauffement climatique bien en dessous de 2°C. Une promesse non suivie d'actions suffisantes.", "timeline4_stat": "Émissions mondiales de CO₂ : ~35 Gt",
+                    "timeline5_year": "AUJOURD'HUI", "timeline5_title": "Réalité : Escalade incontrôlée", "timeline5_paragraph": "Malgré tous les avertissements, diagnostics et promesses, les émissions et la destruction continuent d'atteindre de nouveaux sommets. L'ignorance est systémique.", "timeline5_stat": "Émissions mondiales de CO₂ : >37 Gt",
+                    "anatomy_title": "<span class=\"gradient-text\">Anatomie</span> d'un Parasite", "anatomy_paragraph": "Un parasite extrait les ressources de son hôte pour croître. Il ne rend rien. Ses déchets empoisonnent l'hôte. Sa croissance incontrôlée conduit inévitablement à l'affaiblissement ou à la mort de l'hôte. <br class=\"hidden md:block\"> Voyez-vous les parallèles ?",
+                    "anatomy_step1_title": "Extraction", "anatomy_step1_paragraph": "Nous forons, creusons et défrichons pour satisfaire notre faim d'énergie et de matières premières. Les artères de la planète deviennent nos lignes d'approvisionnement.",
+                    "anatomy_step2_title": "Métabolisme", "anatomy_step2_paragraph": "Notre économie transforme les ressources en produits éphémères et en une immense quantité de déchets - notre métabolisme toxique.",
+                    "anatomy_step3_title": "Excrétion", "anatomy_step3_paragraph": "CO₂, plastique, produits chimiques. Nos déchets sont excrétés dans l'atmosphère, les océans et les sols, empoisonnant le système même qui nous maintient en vie.",
+                    "crossroads_title": "De <span class=\"gradient-text\">Parasite</span> à <span class=\"gradient-text\">Gardien ?</span>", "crossroads_paragraph": "Le diagnostic a été posé. Le dossier est complet. Aucune autre créature ne peut réfléchir à son rôle et le changer consciemment. Cette capacité unique est le dernier, infime espoir dans le bilan de l'Anthropocène. La question n'est plus ce que nous savons. Mais qui nous voulons être.",
+                    "footer_main": "Cette infographie est une synthèse basée sur des données et des conclusions des documents fournis sur l'Anthropocène.", "footer_sources": "Sources incluent : GIEC, IPBES, Groupe de travail sur l'Anthropocène, Crutzen & Stoermer."
+                },
+                // Russian (RU)
+                ru: {
+                    "page_title": "Антропоцен: Досье Паразита", "meta_description": "Диагноз нашей эпохи без прикрас. Интерактивная инфографика о подавляющих масштабах антропоцена и роли человечества.", "og_title": "Антропоцен: Досье Паразита", "og_description": "Диагноз нашей эпохи без прикрас. Интерактивная инфографика о подавляющих масштабах антропоцена и роли человечества.",
+                    "aria_lang_select": "Выбор языка",
+                    "nav_brand": "Досье Паразита", "nav_home": "Главная", "nav_acceleration": "Ускорение", "nav_symptoms": "Симптомы", "nav_ignorance": "Невежество", "nav_anatomy": "Анатомия", "nav_crossroads": "Перепутье",
+                    "sr_open_menu": "Открыть главное меню",
+                    "hero_title": "У Земли есть <span class=\"gradient-text\">паразит.</span>", "hero_subtitle": "Мы.", "hero_paragraph": "Это не мнение. Это досье, составленное из геологических следов и данных, которые мы оставляем. Диагноз нашей эпохи без прикрас: антропоцен.",
+                    "acceleration_title": "<span class=\"gradient-text\">Великое Ускорение</span>", "acceleration_paragraph": "Примерно с 1950 года человеческая деятельность взорвалась. Поворотный момент, который вывел планету из 12 000-летнего равновесия, положив начало новой, изменчивой геологической эпохе. Графики не лгут.",
+                    "aria_chart_population": "График: Население мира с 1800 по 2025 год в миллиардах", "aria_chart_co2": "График: Концентрация CO₂ в ppm с 1800 по 2025 год", "aria_chart_extinction": "Гистограмма: Уровень вымирания по сравнению с фоновым уровнем", "aria_chart_plastic": "График: Производство пластика в миллионах тонн с 1950 по 2024 год",
+                    "chart_population": "Население мира (млрд)", "chart_co2": "Концентрация CO₂ (ppm)", "chart_extinction": "Уровень вымирания (фактор)", "chart_plastic": "Производство пластика (млн т)", "chart_label_background": "Фоновый уровень", "chart_label_current": "Текущий уровень",
+                    "symptoms_title": "Симптомы заражения", "symptoms_paragraph": "Каждое действие оставляет шрам. Мы называем это развитием. Земля называет это лихорадкой, отравлением и разрушением. Четыре основных симптома планетарной болезни.",
+                    "symptom1_title": "Симптом I: Лихорадка", "symptom1_paragraph": "Мы выбрасываем парниковые газы в атмосферу, где они остаются на столетия. Результат: глобальное потепление с беспрецедентной скоростью, таяние ледников, закисление океанов и превращение экстремальных погодных явлений в новую норму.", "symptom1_label": "Концентрация CO₂ в атмосфере (самая высокая за последние 800 000 лет)",
+                    "symptom2_title": "Симптом II: Клеточная смерть", "symptom2_paragraph": "Мы уничтожаем среду обитания, отравляем экосистемы и истребляем виды. Это 6-е массовое вымирание в истории Земли — первое, вызванное одним видом. Паутина жизни рвется.", "symptom2_label": "Соотношение темпов вымирания к естественному фоновому уровню",
+                    "symptom3_title": "Симптом III: Разрастание", "symptom3_paragraph": "Леса, водно-болотные угодья, саванны — мы превращаем их в монокультуры, города и шахты. Мы фрагментируем жизненные артерии планеты, пока не останутся только изолированные, умирающие островки природы.", "symptom3_label": "Суши, свободной ото льда, значительно измененной человеком",
+                    "symptom4_title": "Симптом IV: Токсичность", "symptom4_paragraph": "Наша цивилизация производит стойкие яды. Пластмассы, химикаты и ядерные отходы оставляют слой «техноископаемых», который сохранится на геологические эпохи. Мы покрыли планету новым, нерушимым слоем отходов.", "symptom4_label": "Соотношение массы всех созданных человеком объектов ко всей живой биомассе",
+                    "ignorance_title": "Хроника <span class=\"gradient-text\">Невежества</span>", "ignorance_paragraph": "Предупреждения были. Ясные. Десятилетиями. Но на каждое предупреждение отвечали дальнейшей эскалацией разрушений. Хронология преднамеренного игнорирования.",
+                    "timeline1_title": "Предупреждение: «Пределы роста»", "timeline1_paragraph": "Римский клуб публикует первое крупное исследование, предупреждающее о катастрофических последствиях экспоненциального роста на конечной планете.", "timeline1_stat": "Глобальные выбросы CO₂: ~15 Гт",
+                    "timeline2_title": "Предупреждение: Первый отчет МГЭИК", "timeline2_paragraph": "Межправительственная группа экспертов по изменению климата подтверждает влияние человека на климат и призывает к «существенному сокращению» выбросов.", "timeline2_stat": "Глобальные выбросы CO₂: ~22 Гт",
+                    "timeline3_title": "Диагноз: «Антропоцен»", "timeline3_paragraph": "Пауль Крутцен предлагает термин, формализуя научное признание того, что человек стал доминирующей геологической силой.", "timeline3_stat": "Глобальные выбросы CO₂: ~25 Гт",
+                    "timeline4_title": "Обещание: Парижское соглашение", "timeline4_paragraph": "Мировое сообщество соглашается ограничить глобальное потепление значительно ниже 2°C. Обещание, не подкрепленное достаточными действиями.", "timeline4_stat": "Глобальные выбросы CO₂: ~35 Гт",
+                    "timeline5_year": "СЕГОДНЯ", "timeline5_title": "Реальность: Бесконтрольная эскалация", "timeline5_paragraph": "Несмотря на все предупреждения, диагнозы и обещания, выбросы и разрушения продолжают достигать новых высот. Невежество системно.", "timeline5_stat": "Глобальные выбросы CO₂: >37 Гт",
+                    "anatomy_title": "<span class=\"gradient-text\">Анатомия</span> Паразита", "anatomy_paragraph": "Паразит извлекает ресурсы из своего хозяина для роста. Он ничего не дает взамен. Его отходы отравляют хозяина. Его бесконтрольный рост неизбежно ведет к ослаблению или смерти хозяина. <br class=\"hidden md:block\"> Видите параллели?",
+                    "anatomy_step1_title": "Извлечение", "anatomy_step1_paragraph": "Мы бурим, копаем и вырубаем леса, чтобы утолить наш голод по энергии и сырью. Артерии планеты становятся нашими линиями снабжения.",
+                    "anatomy_step2_title": "Метаболизм", "anatomy_step2_paragraph": "Наша экономика превращает ресурсы в недолговечные продукты и огромное количество отходов — наш токсичный метаболизм.",
+                    "anatomy_step3_title": "Выделение", "anatomy_step3_paragraph": "CO₂, пластик, химикаты. Наши отходы выбрасываются в атмосферу, океаны и почву, отравляя саму систему, которая поддерживает нашу жизнь.",
+                    "crossroads_title": "От <span class=\"gradient-text\">Паразита</span> к <span class=\"gradient-text\">Хранителю?</span>", "crossroads_paragraph": "Диагноз поставлен. Досье заполнено. Ни одно другое существо не может осмыслить свою роль и сознательно изменить ее. Эта уникальная способность — последняя, крошечная надежда в балансе антропоцена. Вопрос уже не в том, что мы знаем. А в том, кем мы хотим быть.",
+                    "footer_main": "Эта инфографика является синтезом данных и выводов из предоставленных документов по антропоцену.", "footer_sources": "Источники включают: МГЭИК, IPBES, Рабочая группа по антропоцену, Крутцен и Штёрмер."
+                },
+                // Arabic (AR)
+                ar: {
+                    "page_title": "الأنثروبوسين: ملف الطفيلي", "meta_description": "تشخيص غير منقح لعصرنا. إنفوجرافيك تفاعلي حول الحجم الهائل لعصر الأنثروبوسين ودور البشرية فيه.", "og_title": "الأنثروبوسين: ملف الطفيلي", "og_description": "تشخيص غير منقح لعصرنا. إنفوجرافيك تفاعلي حول الحجم الهائل لعصر الأنثروبوسين ودور البشرية فيه.",
+                    "aria_lang_select": "اختيار اللغة",
+                    "nav_brand": "ملف الطفيلي", "nav_home": "الرئيسية", "nav_acceleration": "التسارع", "nav_symptoms": "الأعراض", "nav_ignorance": "التجاهل", "nav_anatomy": "التشريح", "nav_crossroads": "مفترق الطرق",
+                    "sr_open_menu": "فتح القائمة الرئيسية",
+                    "hero_title": "الأرض لديها <span class=\"gradient-text\">طفيلي.</span>", "hero_subtitle": "نحن.", "hero_paragraph": "هذا ليس رأيًا. هذا ملف، تم تجميعه من الآثار الجيولوجية والبيانات التي نتركها وراءنا. تشخيص غير منقح لعصرنا: الأنثروبوسين.",
+                    "acceleration_title": "<span class=\"gradient-text\">التسارع العظيم</span>", "acceleration_paragraph": "حوالي عام 1950، انفجر النشاط البشري. نقطة تحول أخرجت الكوكب من توازنه الذي دام 12000 عام، لتبدأ حقبة جيولوجية جديدة ومتقلبة. الرسوم البيانية لا تكذب.",
+                    "aria_chart_population": "رسم بياني: سكان العالم من 1800 إلى 2025 بالمليارات", "aria_chart_co2": "رسم بياني: تركيز ثاني أكسيد الكربون بـ ppm من 1800 إلى 2025", "aria_chart_extinction": "رسم بياني شريطي: معدل الانقراض مقارنة بالمعدل الطبيعي", "aria_chart_plastic": "رسم بياني: إنتاج البلاستيك بملايين الأطنان من 1950 إلى 2024",
+                    "chart_population": "سكان العالم (مليار)", "chart_co2": "تركيز CO₂ (ppm)", "chart_extinction": "معدل الانقراض (عامل)", "chart_plastic": "إنتاج البلاستيك (مليون طن)", "chart_label_background": "المعدل الطبيعي", "chart_label_current": "المعدل الحالي",
+                    "symptoms_title": "أعراض العدوى", "symptoms_paragraph": "كل فعل يترك ندبة. نسميه تطوراً. والأرض تسميه حمى وتسمماً وتدميراً. أربعة أعراض أساسية لمرض كوكبي.",
+                    "symptom1_title": "العَرَض الأول: الحمى", "symptom1_paragraph": "نحن نضخ غازات الدفيئة في الغلاف الجوي، حيث تبقى لقرون. والنتيجة: احترار عالمي بسرعة غير مسبوقة، يذيب الصفائح الجليدية، ويزيد من حمضية المحيطات، ويجعل الطقس المتطرف هو الوضع الطبيعي الجديد.", "symptom1_label": "تركيز ثاني أكسيد الكربون في الغلاف الجوي (الأعلى منذ 800,000 عام على الأقل)",
+                    "symptom2_title": "العَرَض الثاني: موت الخلايا", "symptom2_paragraph": "ندمر الموائل، ونسمم النظم البيئية، ونصطاد الأنواع حتى الانقراض. هذا هو الانقراض الجماعي السادس في تاريخ الأرض - وهو الأول الذي يسببه نوع واحد. شبكة الحياة تتمزق.", "symptom2_label": "نسبة معدل الانقراض إلى المعدل الطبيعي",
+                    "symptom3_title": "العَرَض الثالث: النمو المفرط", "symptom3_paragraph": "الغابات والأراضي الرطبة والسافانا - نحولها إلى زراعات أحادية ومدن ومناجم. نحن نفتت شرايين الحياة على الكوكب حتى لا يتبقى سوى جزر معزولة ومحتضرة من الطبيعة.", "symptom3_label": "من مساحة اليابسة الخالية من الجليد التي تغيرت بشكل كبير بسبب البشر",
+                    "symptom4_title": "العَرَض الرابع: السمية", "symptom4_paragraph": "حضارتنا تنتج سمومًا مستمرة. البلاستيك والمواد الكيميائية والنفايات النووية تترك طبقة \"أحفورية تقنية\" ستستمر لعصور جيولوجية. لقد وضعنا طبقة جديدة غير قابلة للتدمير من النفايات عبر الكوكب.", "symptom4_label": "نسبة كتلة جميع الأشياء التي صنعها الإنسان إلى جميع الكتلة الحيوية الحية",
+                    "ignorance_title": "سجل <span class=\"gradient-text\">التجاهل</span>", "ignorance_paragraph": "التحذيرات كانت موجودة. واضحة. لعقود. ومع ذلك، قوبل كل تحذير بمزيد من التصعيد في التدمير. جدول زمني للتجاهل المتعمد.",
+                    "timeline1_title": "تحذير: \"حدود النمو\"", "timeline1_paragraph": "نادي روما ينشر أول دراسة رئيسية تحذر من العواقب الكارثية للنمو الأسي على كوكب محدود.", "timeline1_stat": "انبعاثات ثاني أكسيد الكربون العالمية: ~15 جيجا طن",
+                    "timeline2_title": "تحذير: التقرير الأول لـ IPCC", "timeline2_paragraph": "الهيئة الحكومية الدولية المعنية بتغير المناخ تؤكد تأثير الإنسان على المناخ وتدعو إلى \"تخفيضات كبيرة\" في الانبعاثات.", "timeline2_stat": "انبعاثات ثاني أكسيد الكربون العالمية: ~22 جيجا طن",
+                    "timeline3_title": "تشخيص: \"الأنثروبوسين\"", "timeline3_paragraph": "يقترح بول كروتزن المصطلح، مما يضفي الطابع الرسمي على الإجماع العلمي بأن البشر أصبحوا القوة الجيولوجية المهيمنة.", "timeline3_stat": "انبعاثات ثاني أكسيد الكربون العالمية: ~25 جيجا طن",
+                    "timeline4_title": "وعد: اتفاق باريس", "timeline4_paragraph": "يتفق المجتمع العالمي على الحد من ظاهرة الاحتباس الحراري إلى أقل بكثير من 2 درجة مئوية. وعد لا تدعمه إجراءات كافية.", "timeline4_stat": "انبعاثات ثاني أكسيد الكربون العالمية: ~35 جيجا طن",
+                    "timeline5_year": "اليوم", "timeline5_title": "الواقع: تصعيد بلا هوادة", "timeline5_paragraph": "على الرغم من كل التحذيرات والتشخيصات والوعود، تستمر الانبعاثات والدمار في الوصول إلى مستويات قياسية جديدة. التجاهل منهجي.", "timeline5_stat": "انبعاثات ثاني أكسيد الكربون العالمية: >37 جيجا طن",
+                    "anatomy_title": "<span class=\"gradient-text\">تشريح</span> الطفيلي", "anatomy_paragraph": "يستخرج الطفيلي الموارد من مضيفه لينمو. لا يعيد شيئًا. فضلاته تسمم المضيف. نموه غير المنضبط يؤدي حتمًا إلى إضعاف المضيف أو موته. <br class=\"hidden md:block\"> هل ترى أوجه التشابه؟",
+                    "anatomy_step1_title": "الاستخراج", "anatomy_step1_paragraph": "نحن نحفر وننقب ونقطع الأشجار لإشباع جوعنا للطاقة والمواد الخام. شرايين الكوكب تصبح خطوط إمدادنا.",
+                    "anatomy_step2_title": "التمثيل الغذائي", "anatomy_step2_paragraph": "اقتصادنا يحول الموارد إلى منتجات قصيرة العمر وكمية هائلة من النفايات - وهو تمثيلنا الغذائي السام.",
+                    "anatomy_step3_title": "الإخراج", "anatomy_step3_paragraph": "ثاني أكسيد الكربون والبلاستيك والمواد الكيميائية. يتم إفراز نفاياتنا في الغلاف الجوي والمحيطات والتربة، مما يسمم النظام الذي يبقينا على قيد الحياة.",
+                    "crossroads_title": "من <span class=\"gradient-text\">طفيلي</span> إلى <span class=\"gradient-text\">وصي؟</span>", "crossroads_paragraph": "تم التشخيص. الملف كامل. لا يوجد مخلوق آخر يمكنه التفكير في دوره وتغييره بوعي. هذه القدرة الفريدة هي الأمل الأخير الضئيل في ميزانية الأنثروبوسين. السؤال لم يعد ماذا نعرف. بل من نريد أن نكون.",
+                    "footer_main": "هذا الإنفوجرافيك هو تجميع يعتمد على بيانات ونتائج من الوثائق المقدمة حول الأنثروبوسين.", "footer_sources": "تشمل المصادر: IPCC, IPBES, Anthropocene Working Group, Crutzen & Stoermer."
+                },
+                // Chinese (ZH)
+                zh: {
+                    "page_title": "人类世：寄生虫档案", "meta_description": "对我们时代未经修饰的诊断。一个关于人类世压倒性规模和人类角色的互动信息图。", "og_title": "人类世：寄生虫档案", "og_description": "对我们时代未经修饰的诊断。一个关于人类世压倒性规模和人类角色的互动信息图。",
+                    "aria_lang_select": "语言选择",
+                    "nav_brand": "寄生虫档案", "nav_home": "首页", "nav_acceleration": "加速", "nav_symptoms": "症状", "nav_ignorance": "无知", "nav_anatomy": "解剖", "nav_crossroads": "十字路口",
+                    "sr_open_menu": "打开主菜单",
+                    "hero_title": "地球有了一个<span class=\"gradient-text\">寄生虫。</span>", "hero_subtitle": "我们。", "hero_paragraph": "这不是观点。这是一份档案，根据我们留下的地质痕迹和数据汇编而成。对我们时代未经修饰的诊断：人类世。",
+                    "acceleration_title": "<span class=\"gradient-text\">大加速</span>", "acceleration_paragraph": "大约从1950年开始，人类活动呈爆炸式增长。一个转折点，将地球从其12000年的平衡中推开，开启了一个新的、不稳定的地质时代。图表不会说谎。",
+                    "aria_chart_population": "图表：1800年至2025年世界人口（十亿）", "aria_chart_co2": "图表：1800年至2025年二氧化碳浓度（ppm）", "aria_chart_extinction": "条形图：物种灭绝速率与背景速率的比较", "aria_chart_plastic": "图表：1950年至2024年塑料产量（百万吨）",
+                    "chart_population": "世界人口（十亿）", "chart_co2": "CO₂浓度（ppm）", "chart_extinction": "灭绝速率（倍数）", "chart_plastic": "塑料产量（百万吨）", "chart_label_background": "背景速率", "chart_label_current": "当前速率",
+                    "symptoms_title": "感染的症状", "symptoms_paragraph": "每一个行动都留下一道伤疤。我们称之为发展。地球称之为发烧、中毒和毁灭。一个行星疾病的四个核心症状。",
+                    "symptom1_title": "症状一：发烧", "symptom1_paragraph": "我们将温室气体泵入大气层，它们会在那里停留数百年。结果是：全球以前所未有的速度变暖，融化冰盖，酸化海洋，并使极端天气成为新常态。", "symptom1_label": "大气中的二氧化碳浓度（至少80万年来的最高值）",
+                    "symptom2_title": "症状二：细胞死亡", "symptom2_paragraph": "我们破坏栖息地，毒化生态系统，并将物种猎杀至灭绝。这是地球历史上的第六次大规模灭绝——也是第一次由单一物种造成的。生命之网正在撕裂。", "symptom2_label": "灭绝速率与自然背景速率的比率",
+                    "symptom3_title": "症状三：过度生长", "symptom3_paragraph": "森林、湿地、草原——我们将它们转变为单一作物、城市和矿山。我们分割了地球的生命线，直到只剩下孤立、垂死的自然之岛。", "symptom3_label": "被人类显着改变的无冰陆地表面",
+                    "symptom4_title": "症状四：毒性", "symptom4_paragraph": "我们的文明生产持久性毒物。塑料、化学品和核废料留下了一个“技术化石”层，将持续地质年代。我们在整个地球上铺设了一个新的、坚不可摧的废物层。", "symptom4_label": "所有人造物体的质量与所有生物质总量的比率",
+                    "ignorance_title": "一部<span class=\"gradient-text\">无知</span>的编年史", "ignorance_paragraph": "警告就在那里。清晰明确。几十年来都是如此。然而，每一个警告都伴随着破坏的进一步升级。一条蓄意漠视的时间线。",
+                    "timeline1_title": "警告：《增长的极限》", "timeline1_paragraph": "罗马俱乐部发表了第一份主要研究报告，警告在一个有限的星球上指数增长的灾难性后果。", "timeline1_stat": "全球二氧化碳排放量：约150亿吨",
+                    "timeline2_title": "警告：IPCC第一份报告", "timeline2_paragraph": "政府间气候变化专门委员会确认了人类对气候的影响，并呼吁“大幅减少”排放。", "timeline2_stat": "全球二氧化碳排放量：约220亿吨",
+                    "timeline3_title": "诊断：“人类世”", "timeline3_paragraph": "保罗·克鲁岑提出了这个术语，正式确立了人类已成为主导地质力量的科学共识。", "timeline3_stat": "全球二氧化碳排放量：约250亿吨",
+                    "timeline4_title": "承诺：《巴黎协定》", "timeline4_paragraph": "全球社会同意将全球变暖限制在远低于2°C的水平。一个没有足够行动支持的承诺。", "timeline4_stat": "全球二氧化碳排放量：约350亿吨",
+                    "timeline5_year": "今天", "timeline5_title": "现实：失控的升级", "timeline5_paragraph": "尽管有所有的警告、诊断和承诺，排放和破坏仍在不断创下新高。这种无知是系统性的。", "timeline5_stat": "全球二氧化碳排放量：>370亿吨",
+                    "anatomy_title": "一个<span class=\"gradient-text\">寄生虫</span>的解剖", "anatomy_paragraph": "寄生虫从宿主身上获取资源以生长。它不回馈任何东西。它的废物毒害宿主。它不受控制的生长不可避免地导致宿主的衰弱或死亡。<br class=\"hidden md:block\">看到相似之处了吗？",
+                    "anatomy_step1_title": "提取", "anatomy_step1_paragraph": "我们钻探、挖掘和砍伐，以满足我们对能源和原材料的渴望。地球的动脉成为我们的供应线。",
+                    "anatomy_step2_title": "新陈代谢", "anatomy_step2_paragraph": "我们的经济将资源转化为短命的产品和大量的废物——我们有毒的新陈代谢。",
+                    "anatomy_step3_title": "排泄", "anatomy_step3_paragraph": "二氧化碳、塑料、化学品。我们的废物被排入大气、海洋和土壤，毒害着维持我们生命的系统。",
+                    "crossroads_title": "从<span class=\"gradient-text\">寄生虫</span>到<span class=\"gradient-text\">守护者？</span>", "crossroads_paragraph": "诊断已经做出。档案已经完整。没有其他生物能够反思自己的角色并有意识地改变它。这种独特的能力是人类世资产负债表中最后、微小的希望。问题不再是我们知道什么。而是我们想成为谁。",
+                    "footer_main": "此信息图是根据所提供的人类世文件中的数据和发现综合而成。", "footer_sources": "来源包括：IPCC、IPBES、人类世工作组、克鲁岑和斯托默。"
+                }
+            };
+            
+            const supportedLangs = Object.keys(translations);
+            let currentLang = 'de';
 
-        // --- Chart.js Default Styles ---
-        Chart.defaults.font.family = "'Inter', sans-serif";
-        Chart.defaults.color = 'rgba(226, 232, 240, 0.7)';
-        Chart.defaults.borderColor = 'rgba(51, 65, 85, 0.5)';
+            const translatePage = () => {
+                const lang = translations[currentLang];
+                if (!lang) return;
 
-        // --- Intersection Observer for Fade-in and Counter Animations ---
-        const animationObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    if (entry.target.hasAttribute('data-counter-target')) {
-                        const el = entry.target;
-                        const target = +el.getAttribute('data-counter-target');
-                        const prefix = el.getAttribute('data-prefix') || '';
-                        const suffix = el.getAttribute('data-suffix') || '';
-                        let current = 0;
-                        const duration = 2000;
-                        const stepTime = 20;
-                        const steps = duration / stepTime;
-                        const increment = target / steps;
-                        
-                        const updateCounter = () => {
-                            current += increment;
-                            if (current < target) {
-                                el.innerText = prefix + Math.ceil(current).toLocaleString('de-DE') + suffix;
-                                setTimeout(updateCounter, stepTime);
-                            } else {
-                                el.innerText = prefix + target.toLocaleString('de-DE') + suffix;
-                            }
-                        };
-                        updateCounter();
-                        animationObserver.unobserve(el); // Animate only once
+                document.querySelectorAll('[data-i18n-key]').forEach(el => {
+                    const key = el.getAttribute('data-i18n-key');
+                    const translation = lang[key];
+                    if (translation) {
+                        if (translation.includes('<span')) {
+                            el.innerHTML = translation;
+                        } else {
+                            el.textContent = translation;
+                        }
+                    }
+                });
+                
+                document.querySelectorAll('[data-i18n-key-aria]').forEach(el => {
+                    const key = el.getAttribute('data-i18n-key-aria');
+                    const translation = lang[key];
+                    if (translation) {
+                        el.setAttribute('aria-label', translation);
+                    }
+                });
+                
+                document.title = lang['page_title'];
+                document.documentElement.lang = currentLang;
+                document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            };
+
+            const setLang = (lang) => {
+                if (supportedLangs.includes(lang)) {
+                    currentLang = lang;
+                    translatePage();
+                    chartModule.updateChartLanguage();
+                }
+            };
+
+            const getTranslation = (key) => {
+                return translations[currentLang]?.[key] || key;
+            };
+            
+            const detectInitialLanguage = () => {
+                const browserLang = navigator.language.split('-')[0];
+                return supportedLangs.includes(browserLang) ? browserLang : 'de';
+            };
+
+            return { setLang, getTranslation, detectInitialLanguage, translatePage };
+        })();
+        
+        // --- UI Module ---
+        const uiModule = (() => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const allSections = Array.from(document.querySelectorAll('header, main section[id]'));
+            const langSwitches = document.querySelectorAll('#lang-switch, #lang-switch-mobile');
+
+            const setupEventListeners = () => {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isExpanded = mobileMenu.classList.toggle('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                });
+
+                document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                        mobileMenuButton.focus();
+                    });
+                });
+
+                langSwitches.forEach(s => s.addEventListener('change', (e) => {
+                    const selectedLang = e.target.value;
+                    i18nModule.setLang(selectedLang);
+                    langSwitches.forEach(other => other.value = selectedLang);
+                }));
+
+                window.addEventListener('scroll', updateActiveNavLink, { passive: true });
+            };
+
+            const updateActiveNavLink = () => {
+                let currentSectionId = '';
+                allSections.forEach(section => {
+                    if (window.scrollY >= section.offsetTop - 100) {
+                        currentSectionId = section.id;
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === `#${currentSectionId}`) {
+                        link.classList.add('active');
+                        link.setAttribute('aria-current', 'page');
+                    } else {
+                        link.classList.remove('active');
+                        link.removeAttribute('aria-current');
+                    }
+                });
+            };
+            
+            const init = (initialLang) => {
+                langSwitches.forEach(s => s.value = initialLang);
+                setupEventListeners();
+                updateActiveNavLink();
+            };
+
+            return { init };
+        })();
+        
+        // --- Animation Module ---
+        const animationModule = (() => {
+            const createVeins = () => {
+                const earthContainer = document.querySelector('.earth-container');
+                if (earthContainer) {
+                    const numVeins = 15;
+                    for (let i = 0; i < numVeins; i++) {
+                        const vein = document.createElement('div');
+                        vein.className = 'parasite-vein';
+                        const size = Math.random() * 80 + 20;
+                        vein.style.width = `${size}px`;
+                        vein.style.height = `${size * 2}px`;
+                        vein.style.top = `${Math.random() * (300 - size)}px`;
+                        vein.style.left = `${Math.random() * (300 - size)}px`;
+                        vein.style.transform = `rotate(${Math.random() * 360}deg)`;
+                        vein.style.animationDelay = `${Math.random() * 2}s`;
+                        earthContainer.appendChild(vein);
                     }
                 }
-            });
-        }, { threshold: 0.2 });
+            };
 
-        document.querySelectorAll('.fade-in-up, [data-counter-target]').forEach(el => animationObserver.observe(el));
+            const animateCounter = (el) => {
+                const target = +el.dataset.counterTarget;
+                const prefix = el.dataset.prefix || '';
+                const suffix = el.dataset.suffix || '';
+                const duration = 2000;
+                let start = null;
+                
+                const step = (timestamp) => {
+                    if (!start) start = timestamp;
+                    const progress = Math.min((timestamp - start) / duration, 1);
+                    const currentValue = Math.floor(progress * target);
+                    el.innerText = prefix + currentValue.toLocaleString(document.documentElement.lang) + suffix;
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        el.innerText = prefix + target.toLocaleString(document.documentElement.lang) + suffix;
+                    }
+                };
+                window.requestAnimationFrame(step);
+            };
+
+            const animationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        if (entry.target.hasAttribute('data-counter-target')) {
+                            animateCounter(entry.target);
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            const init = () => {
+                if (window.particlesJS) {
+                    particlesJS('particles-js', { particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: "#ef4444" }, shape: { type: "circle" }, opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } }, size: { value: 2.5, random: true }, line_linked: { enable: true, distance: 150, color: "#475569", opacity: 0.2, width: 1 }, move: { enable: true, speed: 1.5, direction: "none", random: true, straight: false, out_mode: "out", bounce: false } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: false }, resize: true }, modes: { grab: { distance: 140, line_linked: { opacity: 0.5 } } } }, retina_detect: true });
+                }
+                createVeins();
+                document.querySelectorAll('.fade-in-up, [data-counter-target]').forEach(el => animationObserver.observe(el));
+            };
+            
+            return { init };
+        })();
+
+        // --- Chart Module ---
+        const chartModule = (() => {
+            let charts = {};
+            const chartData = {
+                population: { years: ['1800', '1900', '1950', '2000', '2025'], values: [1, 1.6, 2.5, 6.1, 8.03] },
+                co2: { years: ['1800', '1900', '1950', '2000', '2025'], values: [280, 295, 311, 369, 425] },
+                extinction: { values: [1, 500] },
+                plastic: { years: ['1950', '1975', '2000', '2024'], values: [2, 50, 200, 400] }
+            };
+
+            const createCharts = () => {
+                Chart.defaults.font.family = "'Inter', sans-serif";
+                Chart.defaults.color = 'rgba(226, 232, 240, 0.7)';
+                Chart.defaults.borderColor = 'rgba(51, 65, 85, 0.5)';
+                const baseLineOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, font: { size: 14, weight: 'bold' }, color: '#cbd5e1' } }, scales: { y: { beginAtZero: true }, x: {} }, animation: { duration: 1500, easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)' } };
+
+                charts.population = new Chart(document.getElementById('populationChart'), { type: 'line', data: { labels: chartData.population.years, datasets: [{ data: chartData.population.values, borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.2)', fill: true, tension: 0.4 }] }, options: { ...baseLineOptions } });
+                charts.co2 = new Chart(document.getElementById('co2Chart'), { type: 'line', data: { labels: chartData.co2.years, datasets: [{ data: chartData.co2.values, borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.2)', fill: true, tension: 0.4 }] }, options: { ...baseLineOptions } });
+                charts.extinction = new Chart(document.getElementById('extinctionChart'), { type: 'bar', data: { labels: [], datasets: [{ data: chartData.extinction.values, backgroundColor: ['#475569', '#dc2626'], borderRadius: 4 }] }, options: { ...baseLineOptions } });
+                charts.plastic = new Chart(document.getElementById('plasticChart'), { type: 'line', data: { labels: chartData.plastic.years, datasets: [{ data: chartData.plastic.values, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.2)', fill: true, tension: 0.4 }] }, options: { ...baseLineOptions } });
+            };
+            
+            const updateChartLanguage = () => {
+                if(charts.population) charts.population.options.plugins.title.text = i18nModule.getTranslation('chart_population');
+                if(charts.co2) charts.co2.options.plugins.title.text = i18nModule.getTranslation('chart_co2');
+                if(charts.extinction) {
+                    charts.extinction.options.plugins.title.text = i18nModule.getTranslation('chart_extinction');
+                    charts.extinction.data.labels = [i18nModule.getTranslation('chart_label_background'), i18nModule.getTranslation('chart_label_current')];
+                }
+                if(charts.plastic) charts.plastic.options.plugins.title.text = i18nModule.getTranslation('chart_plastic');
+                
+                Object.values(charts).forEach(chart => chart.update());
+            };
+
+            const init = () => {
+                createCharts();
+                updateChartLanguage();
+            };
+
+            return { init, updateChartLanguage };
+        })();
         
-        // --- Chart Configurations ---
-        const baseLineOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false }, title: { display: true, font: { size: 14, weight: 'bold' }, color: '#cbd5e1' } },
-            scales: { y: { beginAtZero: true, grid: { color: 'rgba(51, 65, 85, 0.5)' }, ticks: { color: 'rgba(226, 232, 240, 0.7)' } }, x: { grid: { color: 'rgba(51, 65, 85, 0.5)' }, ticks: { color: 'rgba(226, 232, 240, 0.7)' } } },
-            animation: {
-                duration: 1500,
-                easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
-            }
+        // --- Main App Initialization ---
+        const main = () => {
+            const initialLang = i18nModule.detectInitialLanguage();
+            i18nModule.setLang(initialLang);
+            
+            uiModule.init(initialLang);
+            animationModule.init();
+            chartModule.init();
         };
 
-        // --- Chart Creation ---
-        new Chart(document.getElementById('populationChart').getContext('2d'), {
-            type: 'line',
-            data: { labels: ['1800', '1900', '1950', '2000', '2024'], datasets: [{ data: [1, 1.6, 2.5, 6.1, 8.1], borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.2)', fill: true, tension: 0.4 }] },
-            options: { ...baseLineOptions, plugins: { ...baseLineOptions.plugins, title: { ...baseLineOptions.plugins.title, text: 'Weltbevölkerung (Mrd.)' } } }
-        });
-
-        new Chart(document.getElementById('co2Chart').getContext('2d'), {
-            type: 'line',
-            data: { labels: ['1800', '1900', '1950', '2000', '2024'], datasets: [{ data: [280, 295, 311, 369, 420], borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.2)', fill: true, tension: 0.4 }] },
-            options: { ...baseLineOptions, plugins: { ...baseLineOptions.plugins, title: { ...baseLineOptions.plugins.title, text: 'CO₂-Konzentration (ppm)' } } }
-        });
-
-        new Chart(document.getElementById('extinctionChart').getContext('2d'), {
-            type: 'bar',
-            data: { labels: ['Hintergrundrate', 'Aktuelle Rate'], datasets: [{ data: [1, 500], backgroundColor: ['#475569', '#dc2626'], borderRadius: 4 }] },
-            options: { ...baseLineOptions, plugins: { ...baseLineOptions.plugins, title: { ...baseLineOptions.plugins.title, text: 'Aussterberate (Faktor)' } } }
-        });
-
-        new Chart(document.getElementById('plasticChart').getContext('2d'), {
-            type: 'line',
-            data: { labels: ['1950', '1975', '2000', '2020'], datasets: [{ data: [2, 50, 200, 400], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.2)', fill: true, tension: 0.4 }] },
-            options: { ...baseLineOptions, plugins: { ...baseLineOptions.plugins, title: { ...baseLineOptions.plugins.title, text: 'Plastikproduktion (Mio. t)' } } }
-        });
-
-        // --- Earth Veins Animation ---
-        const earthContainer = document.querySelector('.earth-container');
-        if (earthContainer) {
-            const numVeins = 15;
-            for (let i = 0; i < numVeins; i++) {
-                const vein = document.createElement('div');
-                vein.className = 'parasite-vein';
-                const size = Math.random() * 80 + 20;
-                vein.style.width = `${size}px`;
-                vein.style.height = `${size * 2}px`;
-                vein.style.top = `${Math.random() * (300 - size)}px`;
-                vein.style.left = `${Math.random() * (300 - size)}px`;
-                vein.style.transform = `rotate(${Math.random() * 360}deg)`;
-                vein.style.animationDelay = `${Math.random() * 2}s`;
-                earthContainer.appendChild(vein);
-            }
-        }
-
-        // --- Navigation Logic ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
-
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-        
-        const mainSections = document.querySelectorAll('main section');
-        const headerSection = document.querySelector('header#home');
-        const allSections = [headerSection, ...Array.from(mainSections)];
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        const activateNavLink = () => {
-            let currentSectionIndex = 0;
-            
-            const scrollPosition = window.scrollY;
-
-            allSections.forEach((section, index) => {
-                 const sectionTop = section.offsetTop;
-                 if (scrollPosition >= sectionTop - 100) {
-                    currentSectionIndex = index;
-                 }
-            });
-            
-            navLinks.forEach(link => link.classList.remove('active'));
-
-            if(navLinks[currentSectionIndex]) {
-                 navLinks[currentSectionIndex].classList.add('active');
-            }
-        };
-
-        window.addEventListener('scroll', activateNavLink);
-        activateNavLink(); // Initial call
+        main();
     });
     </script>
 </body>
 </html>
-
-
-
-
